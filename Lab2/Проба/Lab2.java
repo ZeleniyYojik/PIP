@@ -1,0 +1,135 @@
+// Вариант 1705
+
+public class Lab2 {
+  public static void main(String[] args) {
+    Nosepass sister = new Probopass();
+    Nosepass father = new Nosepass();
+    Probopass daughter = new Probopass();
+
+    daughter.sharpen();
+    daughter.stoneEdge(father);
+    sister.batonPass();
+    daughter.magnetPull();//
+    father.growth();      //При сложении двух чисел с плавающей точкой накопилась погрешность, в результате чего при сравнении получено значение false
+    sister.sharpen();
+    daughter.batonPass();
+    daughter.stoneEdge(sister);//Хотя переменная sister и указывает на экземпляр класса Probopass, но она имеет тип Nosepass(Родительский класс для Probopass) поэтому вызывается перегрузка stoneEdge(Nosepass p)
+    daughter.swordsDance();//Т.к. daughter является экземпляром класса Probopass, и класс Probopass несодержит реализации метода swordDance() вызывется метод swordDance родительского класса
+    father.stoneEdge(daughter);
+    sister.stockpile();
+    father.batonPass();
+    father.stoneEdge(sister);
+    ((Probopass)sister).defenseCurl();//Приводим объект к типу Probopass
+    daughter.unbreakable();
+    father.sharpen();
+  }
+}
+
+class Nosepass {
+  public static int fragile;
+  int sky;
+  protected byte burrow = (byte) 0x84;//Литерал записан в шестнадцатеричной системе счисления, при переводе в десятичную получим 132, но т.к. byte имеет диапазон от -128 до 127 произойдет переполнение и в переменную запишется -124
+  protected String fire = "Fire";
+  protected String grass = "Grass";
+  protected String grassFire = "GrassFire";
+  float depth = 8.2f;
+
+  public Nosepass() {
+    fragile = 84;
+  }
+
+  {
+    sky = 067;//Литерал записан в восьмиричной системе счисления, при переводе в десятичную получим 55  
+  }
+
+
+  public void batonPass() {
+    System.out.println("Nosepass casts Baton Pass");
+  }
+
+  public void stockpile() {
+    System.out.println(grassFire.equals(grass+"Fire"));//Метод equals возращает true, если сравниваемые строки содержат те же самые символы и в том же самом порядке, а иначе false
+    System.out.println(grassFire == "Grass"+"Fire");//Компилятор строковые литералы помещает в пул строк, и если данная строка уже есть в нём, возвращает в переменную String указатель на эту строку.
+    System.out.println(grassFire == "Grass"+fire);
+    System.out.println(grassFire == grass+fire);
+    System.out.println(grassFire.equals(grass+fire));
+    System.out.println(grassFire.equals("Grass"+"Fire"));
+  }
+
+  public void swordsDance() {
+    System.out.println(sky - fragile);
+    System.out.println(fragile - burrow);
+    System.out.println(burrow + sky);
+  }
+
+  public void growth() {
+    float defense = 6.1f;
+
+    System.out.println((depth + defense) == 14.3f);
+  }
+
+  public void stoneEdge(Nosepass p) {
+    System.out.println("Nosepass attacks Nosepass with Stone Edge");
+  }
+
+  public static void sharpen() {
+    System.out.println("Nosepass casts Sharpen");
+  }
+
+  public void stoneEdge(Probopass p) {
+    System.out.println("Nosepass attacks Probopass with Stone Edge");
+  }
+}
+
+class Probopass extends Nosepass {
+  private int stealth;
+  private String electricFire = "ElectricFire";
+  private String electric = "Electric";
+  float height = 3.1f;
+
+  public Probopass() {
+    stealth = 84;
+  }
+
+  {
+    stealth = 23;
+  }
+
+  public void defenseCurl() {
+    System.out.println(electricFire == new String("Electric"+"Fire"));//указатели ссылаются на разные объекты
+    System.out.println(electricFire == electric+fire);//(electric+fire) создаст новый экзепляр класса String и указатели будут ссылаться на разные объекты
+    System.out.println(electricFire == (electric+fire).intern());//(electric+fire) результирующая строка методом intern() помещается в пул строк, и ,т.к. строка ElectricFire в нём уже есть, то вернется указатель на эту строку
+    System.out.println(electricFire == new String("ElectricFire"));//указатели ссылаются на разные объекты
+  }
+
+  public void stoneEdge(Probopass p) {
+    System.out.println("Probopass attacks Probopass with Stone Edge");
+  }
+
+  public void stoneEdge(Nosepass p) {
+    System.out.println("Probopass attacks Nosepass with Stone Edge");
+  }
+
+  public void unbreakable() {
+    System.out.println(stealth + fragile);//переменна fragile берется из родительского класса
+    System.out.println(burrow - stealth);//переменная burrow берется из родительского класса
+    System.out.println(stealth - sky);//переменная sky берется из родительского класса
+  }
+
+  public void batonPass() {
+    System.out.println("Probopass casts Baton Pass");
+  }
+
+  public static void sharpen() {
+    System.out.println("Probopass casts Sharpen");
+  }
+
+  public void magnetPull() {
+    float accuracy = 7.7f;
+
+    System.out.println((accuracy + height) == 10.8f);
+    System.out.println(accuracy + height);
+  }
+}
+
+
