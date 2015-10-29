@@ -1,52 +1,28 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.*;
 
 /**
  * Created by panikun on 26.10.15.
  */
-public class Task3{
-    public static void main(String[] args) {
+public class Task3 extends Thread{
+    public static final Color BACKGROUND_COLOR = Color.WHITE;
+    public static final Color AXIS_COLOR = Color.BLACK;
+    public static final Color KONTUR_COLOR = new Color(0x006400);
+    public static void main(String[] args){
 
-        Set points = new TreeSet();
-        //
-        points.add(new Ponto(0, -2));
-        points.add(new Ponto(4,  3));
-        points.add(new Ponto(3,  4));
-        points.add(new Ponto(1, 2));
-        points.add(new Ponto(2, 1));
-        points.add(new Ponto(-3, -5));
-        points.add(new Ponto(-5, 4));
-        points.add(new Ponto(0, -1));
-        points.add(new Ponto(0, 0));
+            SwingUtilities.invokeLater(new Task3());
 
-        if (args.length==0) {
-            System.out.println("Не задан параметр R");
-            System.exit(1);
         }
-        Kontur kontur = null;
-        try{
-            kontur = new Kontur(new Double(args[0]));
-        }
-        catch(NumberFormatException e){
-            System.out.println("Не удалось преобразовать R в число");
-            System.exit(1);
-        }
-        if (kontur.R<=0) {
-            System.out.println("Некорректное значение R");
-            System.exit(1);
-        }
-
-        System.out.println("R="+args[0]);
-
-        for (Object tmp:points) {
-
-            System.out.println(tmp.toString()+" "+(kontur.isInKontur((Ponto)(tmp)) ? "входит в область":"не входит в область"));
-        }
+        @Override
+        public void run() {
+            new Window();
     }
 }
 class Ponto implements Comparable{
-    float X;
-    float Y;
-    Ponto(float x, float y){
+    double X;
+    double Y;
+    Ponto(double x, double y){
         this.Y=y;
         this.X=x;
     }
@@ -85,6 +61,7 @@ class Kontur{
     Kontur(double r) {
         this.R = r;
     }
+
     public boolean isInKontur(Ponto point){
         if (Math.abs(point.Y)>R) {
             return false;
@@ -103,4 +80,8 @@ class Kontur{
         }
         return false;
     }
+
+    public void setRadius(double rad){
+        this.R = rad;
+    };
 }
