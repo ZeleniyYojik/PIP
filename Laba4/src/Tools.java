@@ -1,17 +1,29 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Enumeration;
 
 /**
  * Created by panikun on 29.10.15.
  */
 public class Tools extends JPanel {
-    public Tools() {
+    public Tools(final Graphic graph) {
         this.setLayout(new GridLayout(1, 10));
         this.add(new JLabel("R:"));
 
-        final JSpinner rSpinner = new JSpinner(new SpinnerNumberModel(1, 0, 20, 0.5));
+        final JSpinner rSpinner = new JSpinner(new SpinnerNumberModel(1, 0, 20, 1));
+        rSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent changeEvent) {
+            graph.setRadius(new Double((int)rSpinner.getValue()));
+            }
+        });
+
+
         this.add(rSpinner);
 
 
@@ -51,7 +63,7 @@ public class Tools extends JPanel {
                         y = Double.parseDouble(button.getText());
                     }
                 }
-               // leftPanel.addPoint(x, y);
+                graph.addPoint(x, y);
             }
         });
         this.add(addPointBtn);
