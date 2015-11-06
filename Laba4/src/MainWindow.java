@@ -13,6 +13,7 @@ class Window extends JFrame{
         this.setLayout(new BorderLayout());
         this.setSize(1024, 768);
         this.setMinimumSize(new Dimension(240, 240));
+        this.setResizable(false);
         Graphic graphic = new Graphic();
         this.add(graphic);
         Tools toolsPanel = new Tools(graphic);

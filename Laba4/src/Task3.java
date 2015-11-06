@@ -31,16 +31,20 @@
         Color color;
         JTextArea textArea;
         boolean isInKontur;
-
+        Thread animation;
         Ponto(double x, double y, int rx, int ry, JTextArea textArea){
             this.radius= Task3.POINT_RADIUS;
             this.Y=y;
             this.X=x;
             this.realX = rx;
+
             this.realY = ry;
             this.textArea = textArea;
             this.textArea.setText(this.toString());
         }
+
+
+
         public int compareTo(Object obj){
             Ponto tmp = (Ponto)obj;
             if((Math.pow(this.X,2)+Math.pow(this.Y,2))>(Math.pow(tmp.X,2)+Math.pow(tmp.Y,2))){
@@ -56,10 +60,10 @@
 
         public void setBlueColor(){this.color = Color.BLUE;}
         public void setRedColor(){this.color = Color.RED;}
-        public void setNewRealCoords(int x, int y){
+/*        public void setNewRealCoords(int x, int y){
             this.realX = x;
             this.realY = y;
-        }
+        }*/
         public void setRadius(int radius){
             this.radius=radius;
         }

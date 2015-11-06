@@ -15,7 +15,7 @@ public class Tools extends JPanel {
         this.setLayout(new GridLayout(1, 10));
         this.add(new JLabel("R:"));
 
-        final JSpinner rSpinner = new JSpinner(new SpinnerNumberModel(1, 0, 20, 1));
+        final JSpinner rSpinner = new JSpinner(new SpinnerNumberModel(1,1, 20, 1));
         rSpinner.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {

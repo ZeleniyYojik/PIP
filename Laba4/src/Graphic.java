@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
+import static java.lang.Thread.interrupted;
 import static java.lang.Thread.sleep;
 
 /**
@@ -31,7 +32,6 @@ public class Graphic extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 addPoint(e.getX(), e.getY());
-                System.out.print("Жмак!!");
             }
         });
         kontur = new Kontur(1);
@@ -54,7 +54,6 @@ public class Graphic extends JPanel{
         Ponto point = new Ponto(Xc,Yc,x,y,area);
         point.setBounds(x - Task3.POINT_RADIUS / 2, y - Task3.POINT_RADIUS / 2, Task3.POINT_RADIUS, Task3.POINT_RADIUS);
         if (!this.points.contains(point)) {
-            System.out.print(point);
             this.points.add(point);
             this.add(point);
             this.add(area);
@@ -71,7 +70,6 @@ public class Graphic extends JPanel{
         Ponto point = new Ponto(x,y,Xc,Yc,area);
         point.setBounds(Xc-Task3.POINT_RADIUS/2,Yc-Task3.POINT_RADIUS/2,Task3.POINT_RADIUS,Task3.POINT_RADIUS);
         if (!this.points.contains(point)) {
-            System.out.print(point);
             this.points.add(point);
             this.add(point);
             this.add(area);
@@ -125,19 +123,20 @@ public class Graphic extends JPanel{
     void drawPoints() {
 
         for (Ponto point : points) {
-            int realX = xCenter + (int) (point.X * scale);
+/*            int realX = xCenter + (int) (point.X * scale);
             int realY = yCenter - (int) (point.Y * scale);
-            point.setNewRealCoords(realX, realY);
+            point.setNewRealCoords(realX, realY);*/
             if (kontur.isInKontur(point)) {
+                if (point.animation!=null){point.animation.interrupt();}
                 point.setBlueColor();
                 point.isInKontur = true;
-               /* point.setBounds(realX - Task3.POINT_RADIUS / 2, realY - Task3.POINT_RADIUS / 2, Task3.POINT_RADIUS, Task3.POINT_RADIUS);*/
                 point.repaint();
             } else {
                 if (point.isInKontur) {
                     point.isInKontur = false;
                     point.setRedColor();
-                    new Thread(new Animation(point, this)).start();
+                    point.animation = new Thread(new Animation(point, this.kontur.R,this.scale));
+                    point.animation.start();
                 } else {
                     point.setRedColor();
                     point.repaint();
@@ -149,16 +148,27 @@ public class Graphic extends JPanel{
     class Animation implements Runnable{
         Ponto point;
         Graphic canvas;
-        public Animation(Ponto point, Graphic canvas){
-            this.canvas=canvas;
+        double R;
+        int scale;
+        //Ponto anim;
+
+
+        public Animation(Ponto point/*Graphic canvas*/,double radius,int scale){
+            //this.canvas=canvas;
             this.point=point;
+            this.R=radius;
+            this.scale=scale;
         }
 
         @Override
         public void run() {
+
             Rectangle bounds = this.point.getBounds();
-            while(!point.isInKontur) {
-                this.point.setRadius((int) (canvas.kontur.R / 10 * canvas.scale));
+           // anim = new Ponto(point.X,point.Y,point.realX,point.realY,point.textArea);
+           // anim.setRedColor();
+            //canvas.add(anim);
+            while(!Thread.interrupted()) {
+                /*this.point.setRadius((int) (canvas.kontur.R / 10 * canvas.scale));
                 this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
                 point.repaint();
                 sleepThr();
@@ -173,17 +183,53 @@ public class Graphic extends JPanel{
                 this.point.setRadius((int) (canvas.kontur.R / 15 * canvas.scale));
                 this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
                 point.repaint();
-                sleepThr();
-                this.point.setRadius((int) (canvas.kontur.R / 10 * canvas.scale));
+                sleepThr();*/
+                resize(bounds,10);
+                try {
+                    sleep(200);
+                } catch (InterruptedException e) {
+                    point.setBounds(bounds);
+                    point.setRadius(Task3.POINT_RADIUS);
+                    point.repaint();
+                    return;
+                }
+                resize(bounds,15);
+                try {
+                    sleep(200);
+                } catch (InterruptedException e) {
+                    point.setBounds(bounds);
+                    point.setRadius(Task3.POINT_RADIUS);
+                    point.repaint();
+                    return;
+                }
+                resize(bounds,20);
+                try {
+                    sleep(200);
+                } catch (InterruptedException e) {
+                    point.setBounds(bounds);
+                    point.setRadius(Task3.POINT_RADIUS);
+                    point.repaint();
+                    return;
+                }
+                resize(bounds,15);
+/*                this.point.setRadius((int) (canvas.kontur.R / 10 * canvas.scale));
                 this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
-                point.repaint();
-                sleepThr();
+                point.repaint();*/
+                //sleepThr();
             }
+            point.setBounds(bounds);
+            point.setRadius(Task3.POINT_RADIUS);
+            point.repaint();
+            //canvas.remove(point);
+           /* point.setBounds(bounds);
+            point.setRadius(Task3.POINT_RADIUS);
+            point.repaint();*/
         }
-        void sleepThr(){
-            try {
-                sleep(400);
-            } catch (InterruptedException e) {}
+        void resize(Rectangle bounds, double div){
+            this.point.setRadius((int) (/*canvas.kontur.*/R / div * /*canvas.*/scale));
+            this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
+            point.repaint();
+
         }
     }
 }
