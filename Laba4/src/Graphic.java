@@ -51,6 +51,7 @@ public class Graphic extends JPanel{
         Ponto point = new Ponto(Xc,Yc,x,y,area);
         point.setBounds(x - Task3.POINT_RADIUS / 2, y - Task3.POINT_RADIUS / 2, Task3.POINT_RADIUS, Task3.POINT_RADIUS);
         if (!this.points.contains(point)) {
+
             this.points.add(point);
             this.add(point);
             this.add(area);
@@ -60,11 +61,25 @@ public class Graphic extends JPanel{
     public void addPoint(double x, double y){
         int Xc = xCenter+(int)((x*scale*20)/this.kontur.R);
         int Yc = yCenter-(int)((y*scale*20)/this.kontur.R);
+        boolean isVisible=true;
+        if (Xc < 0 || Yc < 0 || Yc > xCenter * 2 || Yc > yCenter * 2) {
+            isVisible=false;
+            for (int i = (int)this.kontur.R; i<=20;i++) {
+                Xc = xCenter+(int)((x*scale*20)/i);
+                Yc = yCenter-(int)((y*scale*20)/i);
+                if (Xc > 0 && Yc > 0 && Yc < xCenter * 2 && Yc < yCenter * 2) {
+                    break;
+                }
+
+            }
+        }
         JTextArea area = new JTextArea();
         area.setBounds(Xc - Task3.POINT_RADIUS / 2, Yc - Task3.POINT_RADIUS / 2, 70, 20);
         area.setBackground(new Color(0,0,0,0));
         area.setFont(new Font(area.getFont().getFontName(), area.getFont().getStyle(),area.getFont().getSize()-3));
         Ponto point = new Ponto(x,y,Xc,Yc,area);
+        point.setVisible(isVisible);
+        area.setVisible(isVisible);
         point.setBounds(Xc-Task3.POINT_RADIUS/2,Yc-Task3.POINT_RADIUS/2,Task3.POINT_RADIUS,Task3.POINT_RADIUS);
         if (!this.points.contains(point)) {
             this.points.add(point);
@@ -183,7 +198,7 @@ public class Graphic extends JPanel{
             point.repaint();
         }
         void resize(double div){
-            this.point.setRadius((int) (R / div * scale));
+            this.point.setRadius((int) (R / div * scale)+1);
             point.repaint();
 
         }

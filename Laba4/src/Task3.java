@@ -63,6 +63,9 @@
         public void setBlueColor(){this.color = Color.BLUE;}
         public void setRedColor(){this.color = Color.RED;}
         public void setRadius(int radius){
+            if (radius<=0){
+                this.radius=1;
+            }
             this.radius=radius;
         }
 

@@ -36,10 +36,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21891892">
+            <state vertical-scroll-proportion="0.0">
               <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -52,19 +52,20 @@
         <entry file="file://$PROJECT_DIR$/src/Task3.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="1" selection-start-line="0" selection-start-column="4" selection-end-line="129" selection-end-column="1" />
+              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Graphic.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Graphic.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Graphic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="190" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="190" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.24594595">
+              <caret line="66" column="56" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,10 +92,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/MainWindow.form" />
         <option value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/sun/awt/SunToolkit.class" />
-        <option value="$PROJECT_DIR$/src/Graphic.java" />
         <option value="$PROJECT_DIR$/src/MainWindow.java" />
-        <option value="$PROJECT_DIR$/src/Task3.java" />
         <option value="$PROJECT_DIR$/src/Tools.java" />
+        <option value="$PROJECT_DIR$/src/Task3.java" />
+        <option value="$PROJECT_DIR$/src/Graphic.java" />
       </list>
     </option>
   </component>
@@ -417,7 +418,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="41" />
+      <option name="time" value="43" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -454,6 +455,7 @@
           <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -496,6 +498,7 @@
           <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -528,6 +531,7 @@
           <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -580,6 +584,7 @@
           <caret line="69" column="101" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="101" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -622,6 +627,7 @@
           <caret line="69" column="101" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="101" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -664,6 +670,7 @@
           <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -684,6 +691,7 @@
           <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -726,6 +734,7 @@
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -746,6 +755,7 @@
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -776,6 +786,7 @@
           <caret line="76" column="24" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -796,6 +807,7 @@
           <caret line="76" column="24" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -849,26 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Task3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="1" selection-start-line="0" selection-start-column="4" selection-end-line="129" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Graphic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="190" column="1" selection-start-line="0" selection-start-column="0" selection-end-line="190" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Tools.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -883,8 +875,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21891892">
+        <state vertical-scroll-proportion="0.0">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Task3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setRadius#0;class#Ponto#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Graphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24594595">
+          <caret line="66" column="56" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
