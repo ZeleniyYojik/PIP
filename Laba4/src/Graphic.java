@@ -1,13 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.awt.font.FontRenderContext;
 import java.util.*;
 
-import static java.lang.Thread.interrupted;
-import static java.lang.Thread.sleep;
+import static java.lang.Thread.*;
 
 /**
  * Created by panikun on 29.10.15.
@@ -45,8 +42,8 @@ public class Graphic extends JPanel{
     }
 
     public void addPoint(int x, int y){
-        double Xc = (double)(x-xCenter)/(double)scale;
-        double Yc = (double)(yCenter-y)/(double)scale;
+        double Xc =(double)(x-xCenter)*this.kontur.R/(scale*20);
+        double Yc = (double)(yCenter-y)*this.kontur.R/(scale*20);
         JTextArea area = new JTextArea();
         area.setBounds(x - Task3.POINT_RADIUS / 2, y - Task3.POINT_RADIUS / 2, 70, 20);
         area.setBackground(new Color(0, 0, 0, 0));
@@ -61,8 +58,8 @@ public class Graphic extends JPanel{
         repaint();
     }
     public void addPoint(double x, double y){
-        int Xc = xCenter+(int)(x*scale);
-        int Yc = yCenter-(int)(y*scale);
+        int Xc = xCenter+(int)((x*scale*20)/this.kontur.R);
+        int Yc = yCenter-(int)((y*scale*20)/this.kontur.R);
         JTextArea area = new JTextArea();
         area.setBounds(Xc - Task3.POINT_RADIUS / 2, Yc - Task3.POINT_RADIUS / 2, 70, 20);
         area.setBackground(new Color(0,0,0,0));
@@ -80,6 +77,9 @@ public class Graphic extends JPanel{
 
     public void setRadius(double R){
         this.kontur.setRadius(R);
+        for(Ponto point:points){
+            point.recalculation(this.kontur.R,this.scale,this.xCenter,this.yCenter);
+        }
         repaint();
     }
 
@@ -108,26 +108,22 @@ public class Graphic extends JPanel{
     void drawKontur(Graphics g){
         g.setColor(Task3.KONTUR_COLOR);
         Polygon pol = new Polygon();
-        pol.addPoint(xCenter-(int)(this.kontur.R*scale)/2, yCenter);
+        pol.addPoint(xCenter-(20*scale)/2, yCenter);
         pol.addPoint(xCenter,yCenter);
-        pol.addPoint(xCenter,yCenter - (int)this.kontur.R*scale);
-        pol.addPoint(xCenter + (int)this.kontur.R*scale, yCenter);
+        pol.addPoint(xCenter,yCenter - 20*scale);
+        pol.addPoint(xCenter + 20*scale, yCenter);
         pol.addPoint(xCenter,yCenter);
-        pol.addPoint(xCenter,yCenter + (int)this.kontur.R*scale);
-        pol.addPoint(xCenter-(int)(this.kontur.R*scale)/2, yCenter+(int)this.kontur.R*scale);
+        pol.addPoint(xCenter,yCenter + 20*scale);
+        pol.addPoint(xCenter-(20/2)*scale, yCenter+20*scale);
         g.fillPolygon(pol);
-        g.fillArc(xCenter-(int)this.kontur.R*scale,yCenter-(int)this.kontur.R*scale,
-                (int)this.kontur.R*scale*2,(int)this.kontur.R*scale*2, 270, 90);
+        g.fillArc(xCenter-20*scale,yCenter-20*scale, 20*2*scale,20*2*scale, 270, 90);
     }
 
     void drawPoints() {
-
         for (Ponto point : points) {
-/*            int realX = xCenter + (int) (point.X * scale);
-            int realY = yCenter - (int) (point.Y * scale);
-            point.setNewRealCoords(realX, realY);*/
             if (kontur.isInKontur(point)) {
                 if (point.animation!=null){point.animation.interrupt();}
+                point.setVisible(true);
                 point.setBlueColor();
                 point.isInKontur = true;
                 point.repaint();
@@ -142,19 +138,14 @@ public class Graphic extends JPanel{
                     point.repaint();
                 }
             }
-
         }
     }
     class Animation implements Runnable{
         Ponto point;
-        Graphic canvas;
         double R;
         int scale;
-        //Ponto anim;
 
-
-        public Animation(Ponto point/*Graphic canvas*/,double radius,int scale){
-            //this.canvas=canvas;
+        public Animation(Ponto point,double radius,int scale){
             this.point=point;
             this.R=radius;
             this.scale=scale;
@@ -162,72 +153,37 @@ public class Graphic extends JPanel{
 
         @Override
         public void run() {
-
-            Rectangle bounds = this.point.getBounds();
-           // anim = new Ponto(point.X,point.Y,point.realX,point.realY,point.textArea);
-           // anim.setRedColor();
-            //canvas.add(anim);
             while(!Thread.interrupted()) {
-                /*this.point.setRadius((int) (canvas.kontur.R / 10 * canvas.scale));
-                this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
-                point.repaint();
-                sleepThr();
-                this.point.setRadius((int) (canvas.kontur.R / 15 * canvas.scale));
-                this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
-                point.repaint();
-                sleepThr();
-                this.point.setRadius((int) (canvas.kontur.R / 20 * canvas.scale));
-                this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
-                point.repaint();
-                sleepThr();
-                this.point.setRadius((int) (canvas.kontur.R / 15 * canvas.scale));
-                this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
-                point.repaint();
-                sleepThr();*/
-                resize(bounds,10);
+                resize(10);
                 try {
                     sleep(200);
                 } catch (InterruptedException e) {
-                    point.setBounds(bounds);
                     point.setRadius(Task3.POINT_RADIUS);
                     point.repaint();
                     return;
                 }
-                resize(bounds,15);
+                resize(15);
                 try {
                     sleep(200);
                 } catch (InterruptedException e) {
-                    point.setBounds(bounds);
                     point.setRadius(Task3.POINT_RADIUS);
                     point.repaint();
                     return;
                 }
-                resize(bounds,20);
+                resize(20);
                 try {
                     sleep(200);
                 } catch (InterruptedException e) {
-                    point.setBounds(bounds);
                     point.setRadius(Task3.POINT_RADIUS);
                     point.repaint();
                     return;
                 }
-                resize(bounds,15);
-/*                this.point.setRadius((int) (canvas.kontur.R / 10 * canvas.scale));
-                this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
-                point.repaint();*/
-                //sleepThr();
             }
-            point.setBounds(bounds);
             point.setRadius(Task3.POINT_RADIUS);
             point.repaint();
-            //canvas.remove(point);
-           /* point.setBounds(bounds);
-            point.setRadius(Task3.POINT_RADIUS);
-            point.repaint();*/
         }
-        void resize(Rectangle bounds, double div){
-            this.point.setRadius((int) (/*canvas.kontur.*/R / div * /*canvas.*/scale));
-            this.point.setBounds((int) bounds.getX() - point.radius / 2, (int) bounds.getY() - point.radius / 2, point.radius, point.radius);
+        void resize(double div){
+            this.point.setRadius((int) (R / div * scale));
             point.repaint();
 
         }

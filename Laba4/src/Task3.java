@@ -43,27 +43,25 @@
             this.textArea.setText(this.toString());
         }
 
+        public void recalculation(double R, double scale, int xCenter,int yCenter){
+            int rX = xCenter+(int)((this.X*scale*20)/R);
+            int rY = yCenter-(int)((this.Y*scale*20)/R);
+            if (rX<0 || rY<0){this.setVisible(false);this.textArea.setVisible(false); return;}
+            if (rX>xCenter*2 || rY>yCenter*2){this.setVisible(false);this.textArea.setVisible(false); return;}
 
+            this.realX=rX;
+            this.realY=rY;
+            this.setVisible(true);
+            this.textArea.setVisible(true);
+        }
 
         public int compareTo(Object obj){
             Ponto tmp = (Ponto)obj;
-            if((Math.pow(this.X,2)+Math.pow(this.Y,2))>(Math.pow(tmp.X,2)+Math.pow(tmp.Y,2))){
-                return 1;
-            }
-            if((Math.pow(this.X,2)+Math.pow(this.Y,2))==(Math.pow(tmp.X,2)+Math.pow(tmp.Y,2))) {
-            return 0;
-            }
-            else{
-             return -1;
-             }
+            return (int)((this.X*this.X+this.Y*this.Y)-(tmp.X*tmp.X+tmp.Y*tmp.Y));
         }
 
         public void setBlueColor(){this.color = Color.BLUE;}
         public void setRedColor(){this.color = Color.RED;}
-/*        public void setNewRealCoords(int x, int y){
-            this.realX = x;
-            this.realY = y;
-        }*/
         public void setRadius(int radius){
             this.radius=radius;
         }
@@ -116,7 +114,7 @@ class Kontur{
             return true;
         }
         //Попадание в четвертую четверть
-        if (point.Y<=0 && point.X>=0 && Math.sqrt(Math.pow(point.X,2)+Math.pow(point.Y,2))<=this.R) {
+        if (point.Y<=0 && point.X>=0 && Math.sqrt(point.X*point.X+point.Y*point.Y)<=this.R) {
             return true;
         }
         //Попадание в третью четверть
