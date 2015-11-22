@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.regex.Pattern;
 
 /**
  * Created by panikun on 22.11.15.
@@ -25,21 +26,43 @@ public class RequestHandler extends Thread {
             message = br.readLine();
         } catch (IOException e) {
             e.printStackTrace();
+            closeConnection();
             return;
         }
         float[] params = new float[3];//x,y,r
-        params[0]=1;
-        params[1]=1;
-        params[2]=2;
+        String[] par = message.split(";");
+        if (par.length!=3){
+            System.err.println("Неверный формат сообщения");
+            closeConnection();
+            return;
+        }
+        for (int i=0; i<3; i++){
+            try {
+                params[i] = Float.parseFloat(par[i]);
+            }
+            catch (NumberFormatException e){
+                System.err.println("Неверный формат сообщения");
+                closeConnection();
+                return;
+            }
+        }
+//        params[0]=1;
+//        params[1]=1;
+//        params[2]=2;
+
 
         ps.print(new Kontur(params[2]).isInKontur(new Point(params[0],params[1])));
         //System.out.println("Сообщение: "+message);
+        closeConnection();
+
+    }
+
+    void closeConnection(){
+
         try {
-            client.close();
-           // System.out.println("Клиент закрыт");
+            this.client.close();
         } catch (IOException e) {
-            System.err.println("Не удалось закрыть клиент");
-            return;
+            System.err.println("Ошибка при закрытии соединения");
         }
     }
 }

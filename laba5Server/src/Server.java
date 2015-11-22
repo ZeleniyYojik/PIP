@@ -1,41 +1,29 @@
 import java.io.IOException;
-import java.net.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-/**
- * Created by panikun on 22.11.15.
- */
-public class Server extends Thread {
-    Server(){
-        start();
-    }
-
-    @Override
-    public void run() {
-        System.out.println("Слушает: " + this.toString());
-        ServerSocket  serverSocket;
+public class Server {
+    public static final int PORT = 11111;
+    //public static final int BUFF_SIZE = 1024;
+    public static void main(String[] args) {
+        //new Server();
+        ServerSocket serverSocket;
         try {
-            serverSocket =new ServerSocket(Task5.PORT);
+            serverSocket = new ServerSocket(Server.PORT);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Не удалось открыть данный порт: " + Server.PORT);
             return;
         }
-        while (true){
+        System.out.println("Сервер запущен");
+        while (true) {
             try {
                 Socket client = serverSocket.accept();
+                new RequestHandler(client);
+
             } catch (IOException e) {
                 System.err.println("Ошибка приема клиента");
             }
 
-
         }
-
-    }
-
-    String acceptClient() throws IOException{
-
-       // Socket client =  socket.accept();
-       // System.out.println("Принят клиент: " + client.toString());
-        //client.getOutputStream();
-        return " ";
     }
 }
