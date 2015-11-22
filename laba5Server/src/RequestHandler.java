@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.regex.Pattern;
+
 
 /**
  * Created by panikun on 22.11.15.
@@ -18,14 +18,14 @@ public class RequestHandler extends Thread {
         InputStreamReader ir;
         PrintStream ps;
         String message;
-        //System.out.println("Начинаю обработку");
+
         try {
             ir= new InputStreamReader(client.getInputStream());
             BufferedReader br = new BufferedReader(ir);
             ps = new PrintStream(client.getOutputStream());
             message = br.readLine();
+            System.out.println(message);
         } catch (IOException e) {
-            e.printStackTrace();
             closeConnection();
             return;
         }
@@ -46,13 +46,11 @@ public class RequestHandler extends Thread {
                 return;
             }
         }
-//        params[0]=1;
-//        params[1]=1;
-//        params[2]=2;
 
 
-        ps.print(new Kontur(params[2]).isInKontur(new Point(params[0],params[1])));
-        //System.out.println("Сообщение: "+message);
+        ps.print(new Kontur(params[2]).isInKontur(new Point(params[0], params[1])));
+        ps.close();
+        System.out.println("Сообщение отправлено:   "+new Kontur(params[2]).isInKontur(new Point(params[0], params[1])));
         closeConnection();
 
     }

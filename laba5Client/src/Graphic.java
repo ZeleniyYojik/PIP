@@ -51,7 +51,7 @@ public class Graphic extends JPanel{
         point.setBounds(x - Task5.POINT_RADIUS / 2, y - Task5.POINT_RADIUS / 2, Task5.POINT_RADIUS, Task5.POINT_RADIUS);
         point.setGreyColor();
         if (!this.points.contains(point)) {
-
+            new Thread(new RequestSender(point,this.kontur.R)).start();
             this.points.add(point);
             this.add(point);
             this.add(area);
@@ -83,6 +83,7 @@ public class Graphic extends JPanel{
         point.setBounds(Xc-Task5.POINT_RADIUS/2,Yc-Task5.POINT_RADIUS/2,Task5.POINT_RADIUS,Task5.POINT_RADIUS);
         point.setGreyColor();
         if (!this.points.contains(point)) {
+            new Thread(new RequestSender(point,this.kontur.R)).start();
             this.points.add(point);
             this.add(point);
             this.add(area);
@@ -95,6 +96,8 @@ public class Graphic extends JPanel{
         this.kontur.setRadius(R);
         for(Ponto point:points){
             point.recalculation(this.kontur.R,this.scale,this.xCenter,this.yCenter);
+            point.setGreyColor();
+            new Thread(new RequestSender(point,this.kontur.R)).start();
         }
         repaint();
     }
@@ -136,7 +139,9 @@ public class Graphic extends JPanel{
     }
 
     void drawPoints() {
+
         for (Ponto point : points) {
+/*
             if (kontur.isInKontur(point)) {
                 if (point.animation!=null){point.animation.interrupt();}
                 point.setVisible(true);
@@ -152,7 +157,8 @@ public class Graphic extends JPanel{
                 } else {
                     point.setRedColor();
                     point.repaint();
-                }
+                }*/
+            point.repaint();
             }
         }
     }
@@ -203,5 +209,5 @@ public class Graphic extends JPanel{
             point.repaint();
 
         }
-    }
+
 }
