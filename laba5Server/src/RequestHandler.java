@@ -24,16 +24,13 @@ public class RequestHandler extends Thread {
             BufferedReader br = new BufferedReader(ir);
             ps = new PrintStream(client.getOutputStream());
             message = br.readLine();
-            System.out.println(message);
         } catch (IOException e) {
-            closeConnection();
             return;
         }
         float[] params = new float[3];//x,y,r
         String[] par = message.split(";");
         if (par.length!=3){
             System.err.println("Неверный формат сообщения");
-            closeConnection();
             return;
         }
         for (int i=0; i<3; i++){
@@ -42,25 +39,16 @@ public class RequestHandler extends Thread {
             }
             catch (NumberFormatException e){
                 System.err.println("Неверный формат сообщения");
-                closeConnection();
                 return;
             }
         }
 
 
         ps.print(new Kontur(params[2]).isInKontur(new Point(params[0], params[1])));
+        ps.flush();
         ps.close();
         System.out.println("Сообщение отправлено:   "+new Kontur(params[2]).isInKontur(new Point(params[0], params[1])));
-        closeConnection();
 
     }
 
-    void closeConnection(){
-
-        try {
-            this.client.close();
-        } catch (IOException e) {
-            System.err.println("Ошибка при закрытии соединения");
-        }
-    }
 }
