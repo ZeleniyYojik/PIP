@@ -40,52 +40,26 @@ public class RequestSender implements Runnable {
             pr.println(x + ";" + y + ";" + r);
             message=brdr.readLine();
         } catch (UnknownHostException e) {
-            e.printStackTrace();
             point.setGreyColor();
             return;
         } catch (IOException e) {
-            point.setGreyColor();
-            e.printStackTrace();
             return;
         }
 
-
-//        try {
-//            socket = new Socket("localhost", RequestSender.PORT);
-//            ps = new PrintStream(socket.getOutputStream());
-//        } catch (IOException e) {
-//            System.err.println("Не удалось отправить запрос: ");
-//            point.setGreyColor();
-//            return;
-//        }
-       // pr.println(x + ";" + y + ";" + r);
-       // ps.flush();
-
-
-
-//        try {
-//            ir = new InputStreamReader(socket.getInputStream());
-//            BufferedReader br = new BufferedReader(ir);
-//            message = br.readLine();
-//        } catch (IOException e) {
-//            point.setGreyColor();
-//            System.err.println(e);
-//            return;
-//        }
-        
         switch (message){
-            case "0": {point.setRedColor();} break;
-            case "1":{point.setBlueColor();} break;
+            case "0": {
+                point.setRedColor();
+                if (point.isInKontur){
+                    point.needAnimation=true;
+                }
+                else {
+                    point.needAnimation=false;
+                }
+                    point.isInKontur=false;
+            } break;
+            case "1":{point.setBlueColor(); point.isInKontur=true; point.needAnimation=false;} break;
             default:{point.setGreyColor();} break;
         }
-        //closeSocket();
     }
-
-//    private void closeSocket() {
-//        try {
-//            this.socket.close();
-//        } catch (IOException e) {
-//        }
-//    }
 
 }

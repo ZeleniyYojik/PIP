@@ -9,7 +9,7 @@ import static java.lang.Thread.*;
 /**
  * Created by panikun on 29.10.15.
  */
-public class Graphic extends JPanel{
+public class Graphic extends JPanel {
 
     private Set<Ponto> points = new HashSet<Ponto>();
     private Kontur kontur;
@@ -20,6 +20,7 @@ public class Graphic extends JPanel{
     private int height;
     private int width;
     private int scale;
+
     public Graphic() {
         this.setDoubleBuffered(true);
         this.setLayout(null);
@@ -40,33 +41,34 @@ public class Graphic extends JPanel{
         });
     }
 
-    public void addPoint(int x, int y){
-        double Xc =(double)(x-xCenter)*this.kontur.R/(scale*20);
-        double Yc = (double)(yCenter-y)*this.kontur.R/(scale*20);
+    public void addPoint(int x, int y) {
+        double Xc = (double) (x - xCenter) * this.kontur.R / (scale * 20);
+        double Yc = (double) (yCenter - y) * this.kontur.R / (scale * 20);
         JTextArea area = new JTextArea();
         area.setBounds(x - Task5.POINT_RADIUS / 2, y - Task5.POINT_RADIUS / 2, 70, 20);
         area.setBackground(new Color(0, 0, 0, 0));
         area.setFont(new Font(area.getFont().getFontName(), area.getFont().getStyle(), area.getFont().getSize() - 3));
-        Ponto point = new Ponto(Xc,Yc,x,y,area);
+        Ponto point = new Ponto(Xc, Yc, x, y, area);
         point.setBounds(x - Task5.POINT_RADIUS / 2, y - Task5.POINT_RADIUS / 2, Task5.POINT_RADIUS, Task5.POINT_RADIUS);
         point.setGreyColor();
         if (!this.points.contains(point)) {
-            new Thread(new RequestSender(point,this.kontur.R)).start();
+            new Thread(new RequestSender(point, this.kontur.R)).start();
             this.points.add(point);
             this.add(point);
             this.add(area);
         }
         repaint();
     }
-    public void addPoint(double x, double y){
-        int Xc = xCenter+(int)((x*scale*20)/this.kontur.R);
-        int Yc = yCenter-(int)((y*scale*20)/this.kontur.R);
-        boolean isVisible=true;
+
+    public void addPoint(double x, double y) {
+        int Xc = xCenter + (int) ((x * scale * 20) / this.kontur.R);
+        int Yc = yCenter - (int) ((y * scale * 20) / this.kontur.R);
+        boolean isVisible = true;
         if (Xc < 0 || Yc < 0 || Yc > xCenter * 2 || Yc > yCenter * 2) {
-            isVisible=false;
-            for (int i = (int)this.kontur.R; i<=20;i++) {
-                Xc = xCenter+(int)((x*scale*20)/i);
-                Yc = yCenter-(int)((y*scale*20)/i);
+            isVisible = false;
+            for (int i = (int) this.kontur.R; i <= 20; i++) {
+                Xc = xCenter + (int) ((x * scale * 20) / i);
+                Yc = yCenter - (int) ((y * scale * 20) / i);
                 if (Xc > 0 && Yc > 0 && Yc < xCenter * 2 && Yc < yCenter * 2) {
                     break;
                 }
@@ -75,15 +77,15 @@ public class Graphic extends JPanel{
         }
         JTextArea area = new JTextArea();
         area.setBounds(Xc - Task5.POINT_RADIUS / 2, Yc - Task5.POINT_RADIUS / 2, 70, 20);
-        area.setBackground(new Color(0,0,0,0));
-        area.setFont(new Font(area.getFont().getFontName(), area.getFont().getStyle(),area.getFont().getSize()-3));
-        Ponto point = new Ponto(x,y,Xc,Yc,area);
+        area.setBackground(new Color(0, 0, 0, 0));
+        area.setFont(new Font(area.getFont().getFontName(), area.getFont().getStyle(), area.getFont().getSize() - 3));
+        Ponto point = new Ponto(x, y, Xc, Yc, area);
         point.setVisible(isVisible);
         area.setVisible(isVisible);
-        point.setBounds(Xc-Task5.POINT_RADIUS/2,Yc-Task5.POINT_RADIUS/2,Task5.POINT_RADIUS,Task5.POINT_RADIUS);
+        point.setBounds(Xc - Task5.POINT_RADIUS / 2, Yc - Task5.POINT_RADIUS / 2, Task5.POINT_RADIUS, Task5.POINT_RADIUS);
         point.setGreyColor();
         if (!this.points.contains(point)) {
-            new Thread(new RequestSender(point,this.kontur.R)).start();
+            new Thread(new RequestSender(point, this.kontur.R)).start();
             this.points.add(point);
             this.add(point);
             this.add(area);
@@ -92,76 +94,77 @@ public class Graphic extends JPanel{
     }
 
 
-    public void setRadius(double R){
+    public void setRadius(double R) {
         this.kontur.setRadius(R);
-        for(Ponto point:points){
-            point.recalculation(this.kontur.R,this.scale,this.xCenter,this.yCenter);
+        for (Ponto point : points) {
+            point.recalculation(this.kontur.R, this.scale, this.xCenter, this.yCenter);
             point.setGreyColor();
-            new Thread(new RequestSender(point,this.kontur.R)).start();
+            new Thread(new RequestSender(point, this.kontur.R)).start();
         }
         repaint();
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         this.x = this.getX();
         this.y = this.getY();
         this.width = this.getWidth();
         this.height = this.getHeight();
 
-        scale = ((xCenter>yCenter)?yCenter/20:xCenter/20);
+        scale = ((xCenter > yCenter) ? yCenter / 20 : xCenter / 20);
 
-        this.xCenter = x+width/2;
-        this.yCenter = y+height/2;
+        this.xCenter = x + width / 2;
+        this.yCenter = y + height / 2;
         super.paintComponent(g);
         drawKontur(g);
         drawPoints();
         drawAxises(g);
     }
 
-    void drawAxises(Graphics g){
+    void drawAxises(Graphics g) {
         g.setColor(Task5.AXIS_COLOR);
-        g.drawLine(x, yCenter, x+width,yCenter);
-        g.drawLine(xCenter,y,xCenter,y+height);
+        g.drawLine(x, yCenter, x + width, yCenter);
+        g.drawLine(xCenter, y, xCenter, y + height);
     }
-    void drawKontur(Graphics g){
+
+    void drawKontur(Graphics g) {
         g.setColor(Task5.KONTUR_COLOR);
         Polygon pol = new Polygon();
-        pol.addPoint(xCenter-(20*scale)/2, yCenter);
-        pol.addPoint(xCenter,yCenter);
-        pol.addPoint(xCenter,yCenter - 20*scale);
-        pol.addPoint(xCenter + 20*scale, yCenter);
-        pol.addPoint(xCenter,yCenter);
-        pol.addPoint(xCenter,yCenter + 20*scale);
-        pol.addPoint(xCenter-(20/2)*scale, yCenter+20*scale);
+        pol.addPoint(xCenter - (20 * scale) / 2, yCenter);
+        pol.addPoint(xCenter, yCenter);
+        pol.addPoint(xCenter, yCenter - 20 * scale);
+        pol.addPoint(xCenter + 20 * scale, yCenter);
+        pol.addPoint(xCenter, yCenter);
+        pol.addPoint(xCenter, yCenter + 20 * scale);
+        pol.addPoint(xCenter - (20 / 2) * scale, yCenter + 20 * scale);
         g.fillPolygon(pol);
-        g.fillArc(xCenter-20*scale,yCenter-20*scale, 20*2*scale,20*2*scale, 270, 90);
+        g.fillArc(xCenter - 20 * scale, yCenter - 20 * scale, 20 * 2 * scale, 20 * 2 * scale, 270, 90);
     }
 
     void drawPoints() {
 
         for (Ponto point : points) {
-/*
-            if (kontur.isInKontur(point)) {
-                if (point.animation!=null){point.animation.interrupt();}
-                point.setVisible(true);
-                point.setBlueColor();
-                point.isInKontur = true;
+            if (point.isGray) {
+                point.repaint();
+                continue;
+            }
+            if (point.isInKontur) {
+                if (point.animation != null) {
+                    point.animation.interrupt();
+                }
                 point.repaint();
             } else {
-                if (point.isInKontur) {
-                    point.isInKontur = false;
-                    point.setRedColor();
-                    point.animation = new Thread(new Animation(point, this.kontur.R,this.scale));
+                if (point.needAnimation) {
+                    point.animation = new Thread(new Animation(point, this.kontur.R, this.scale));
                     point.animation.start();
+                    point.needAnimation=false;
                 } else {
-                    point.setRedColor();
                     point.repaint();
-                }*/
-            point.repaint();
+                }
             }
         }
     }
+}
     class Animation implements Runnable{
         Ponto point;
         double R;

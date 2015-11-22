@@ -32,6 +32,9 @@ class Ponto extends JComponent implements Comparable{
     JTextArea textArea;
     boolean isInKontur;
     Thread animation;
+    public boolean needAnimation;
+    public boolean isGray;
+
     Ponto(double x, double y, int rx, int ry, JTextArea textArea){
         this.radius= Task5.POINT_RADIUS;
         this.Y=y;
@@ -60,9 +63,9 @@ class Ponto extends JComponent implements Comparable{
         return (int)((this.X*this.X+this.Y*this.Y)-(tmp.X*tmp.X+tmp.Y*tmp.Y));
     }
 
-    public void setBlueColor(){this.color = Color.BLUE;}
-    public void setRedColor(){this.color = Color.RED;}
-    public void setGreyColor(){this.color = new Color(0xC0C0C0);}
+    public void setBlueColor(){this.color = Color.BLUE;this.isGray=false;}
+    public void setRedColor(){this.color = Color.RED;this.isGray=false;}
+    public void setGreyColor(){this.color = new Color(0xC0C0C0); this.isGray=true;}
     public void setRadius(int radius){
         if (radius<=0){
             this.radius=1;

@@ -47,7 +47,7 @@ public class RequestHandler extends Thread {
         ps.print(new Kontur(params[2]).isInKontur(new Point(params[0], params[1])));
         ps.flush();
         ps.close();
-        System.out.println("Сообщение отправлено:   "+new Kontur(params[2]).isInKontur(new Point(params[0], params[1])));
+
 
     }
 
