@@ -20,11 +20,10 @@ public class Graphic extends JPanel{
     private int height;
     private int width;
     private int scale;
-    int ris = 0;
     public Graphic() {
         this.setDoubleBuffered(true);
         this.setLayout(null);
-        this.setBackground(Task3.BACKGROUND_COLOR);
+        this.setBackground(Task5.BACKGROUND_COLOR);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -45,11 +44,12 @@ public class Graphic extends JPanel{
         double Xc =(double)(x-xCenter)*this.kontur.R/(scale*20);
         double Yc = (double)(yCenter-y)*this.kontur.R/(scale*20);
         JTextArea area = new JTextArea();
-        area.setBounds(x - Task3.POINT_RADIUS / 2, y - Task3.POINT_RADIUS / 2, 70, 20);
+        area.setBounds(x - Task5.POINT_RADIUS / 2, y - Task5.POINT_RADIUS / 2, 70, 20);
         area.setBackground(new Color(0, 0, 0, 0));
         area.setFont(new Font(area.getFont().getFontName(), area.getFont().getStyle(), area.getFont().getSize() - 3));
         Ponto point = new Ponto(Xc,Yc,x,y,area);
-        point.setBounds(x - Task3.POINT_RADIUS / 2, y - Task3.POINT_RADIUS / 2, Task3.POINT_RADIUS, Task3.POINT_RADIUS);
+        point.setBounds(x - Task5.POINT_RADIUS / 2, y - Task5.POINT_RADIUS / 2, Task5.POINT_RADIUS, Task5.POINT_RADIUS);
+        point.setGreyColor();
         if (!this.points.contains(point)) {
 
             this.points.add(point);
@@ -74,13 +74,14 @@ public class Graphic extends JPanel{
             }
         }
         JTextArea area = new JTextArea();
-        area.setBounds(Xc - Task3.POINT_RADIUS / 2, Yc - Task3.POINT_RADIUS / 2, 70, 20);
+        area.setBounds(Xc - Task5.POINT_RADIUS / 2, Yc - Task5.POINT_RADIUS / 2, 70, 20);
         area.setBackground(new Color(0,0,0,0));
         area.setFont(new Font(area.getFont().getFontName(), area.getFont().getStyle(),area.getFont().getSize()-3));
         Ponto point = new Ponto(x,y,Xc,Yc,area);
         point.setVisible(isVisible);
         area.setVisible(isVisible);
-        point.setBounds(Xc-Task3.POINT_RADIUS/2,Yc-Task3.POINT_RADIUS/2,Task3.POINT_RADIUS,Task3.POINT_RADIUS);
+        point.setBounds(Xc-Task5.POINT_RADIUS/2,Yc-Task5.POINT_RADIUS/2,Task5.POINT_RADIUS,Task5.POINT_RADIUS);
+        point.setGreyColor();
         if (!this.points.contains(point)) {
             this.points.add(point);
             this.add(point);
@@ -116,12 +117,12 @@ public class Graphic extends JPanel{
     }
 
     void drawAxises(Graphics g){
-        g.setColor(Task3.AXIS_COLOR);
+        g.setColor(Task5.AXIS_COLOR);
         g.drawLine(x, yCenter, x+width,yCenter);
         g.drawLine(xCenter,y,xCenter,y+height);
     }
     void drawKontur(Graphics g){
-        g.setColor(Task3.KONTUR_COLOR);
+        g.setColor(Task5.KONTUR_COLOR);
         Polygon pol = new Polygon();
         pol.addPoint(xCenter-(20*scale)/2, yCenter);
         pol.addPoint(xCenter,yCenter);
@@ -136,12 +137,6 @@ public class Graphic extends JPanel{
 
     void drawPoints() {
         for (Ponto point : points) {
-//            System.out.print((this.getComponents()[0].toString()));
-//            System.out.print((this.getComponents()[0].isVisible()));
-//            System.out.print((this.getComponents()[0].isValid()));
-//            System.out.print((this.getComponents()[0].isDisplayable()));
-//            System.out.print((this.getComponents()[0].isEnabled()));
-//            System.out.println((this.getComponents()[0].isShowing()));
             if (kontur.isInKontur(point)) {
                 if (point.animation!=null){point.animation.interrupt();}
                 point.setVisible(true);
@@ -179,7 +174,7 @@ public class Graphic extends JPanel{
                 try {
                     sleep(200);
                 } catch (InterruptedException e) {
-                    point.setRadius(Task3.POINT_RADIUS);
+                    point.setRadius(Task5.POINT_RADIUS);
                     point.repaint();
                     return;
                 }
@@ -187,7 +182,7 @@ public class Graphic extends JPanel{
                 try {
                     sleep(200);
                 } catch (InterruptedException e) {
-                    point.setRadius(Task3.POINT_RADIUS);
+                    point.setRadius(Task5.POINT_RADIUS);
                     point.repaint();
                     return;
                 }
@@ -195,12 +190,12 @@ public class Graphic extends JPanel{
                 try {
                     sleep(200);
                 } catch (InterruptedException e) {
-                    point.setRadius(Task3.POINT_RADIUS);
+                    point.setRadius(Task5.POINT_RADIUS);
                     point.repaint();
                     return;
                 }
             }
-            point.setRadius(Task3.POINT_RADIUS);
+            point.setRadius(Task5.POINT_RADIUS);
             point.repaint();
         }
         void resize(double div){

@@ -46,13 +46,13 @@
         public void recalculation(double R, double scale, int xCenter,int yCenter){
             int rX = xCenter+(int)((this.X*scale*20)/R);
             int rY = yCenter-(int)((this.Y*scale*20)/R);
-            if (rX<0 || rY<0){this.setVisible(false);this.textArea.setVisible(false); return;}
-            if (rX>xCenter*2 || rY>yCenter*2){this.setVisible(false);this.textArea.setVisible(false); return;}
-
+//            if (rX<0 || rY<0){this.setVisible(false);this.textArea.setVisible(false); return;}
+//            if (rX>xCenter*2 || rY>yCenter*2){this.setVisible(false);this.textArea.setVisible(false); return;}
+//
             this.realX=rX;
             this.realY=rY;
-            this.setVisible(true);
-            this.textArea.setVisible(true);
+//            this.setVisible(true);
+//            this.textArea.setVisible(true);
         }
 
         public int compareTo(Object obj){
