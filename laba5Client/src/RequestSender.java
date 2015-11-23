@@ -1,5 +1,3 @@
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,54 +9,58 @@ import java.net.UnknownHostException;
  * Created by panikun on 22.11.15.
  */
 public class RequestSender implements Runnable {
-    public static final int PORT=11111;
+    public static final int PORT = 11111;
     //Socket socket;
     float r;
     float x;
     float y;
     Ponto point;
 
-    RequestSender(Ponto point,double radius){
-        this.point=point;
-        this.r = (float)radius;
-
+    RequestSender(Ponto point, double radius) {
+        this.point = point;
+        this.r = (float) radius;
     }
 
     @Override
     public void run() {
-        this.y = (float)point.Y;
-        this.x = (float)point.X;
-        PrintStream ps;
-        InputStreamReader ir;
+        this.y = (float) point.Y;
+        this.x = (float) point.X;
         String message;
-        try(
+        try (
                 Socket socket = new Socket("localhost", RequestSender.PORT);
-                PrintStream pr= new PrintStream(socket.getOutputStream());
-                BufferedReader brdr=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                PrintStream pr = new PrintStream(socket.getOutputStream());
+                BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         ) {
             pr.println(x + ";" + y + ";" + r);
-            message=brdr.readLine();
+            message = br.readLine();
         } catch (UnknownHostException e) {
             point.setGreyColor();
             return;
         } catch (IOException e) {
             return;
         }
-
-        switch (message){
+        switch (message) {
             case "0": {
                 point.setRedColor();
-                if (point.isInKontur){
-                    point.needAnimation=true;
+                if (point.isInKontur) {
+                    point.needAnimation = true;
+                } else {
+                    point.needAnimation = false;
                 }
-                else {
-                    point.needAnimation=false;
-                }
-                    point.isInKontur=false;
-            } break;
-            case "1":{point.setBlueColor(); point.isInKontur=true; point.needAnimation=false;} break;
-            default:{point.setGreyColor();} break;
+                point.isInKontur = false;
+            }
+            break;
+            case "1": {
+                point.setBlueColor();
+                point.isInKontur = true;
+                point.needAnimation = false;
+            }
+            break;
+            default: {
+                point.setGreyColor();
+            }
+            break;
         }
     }
 

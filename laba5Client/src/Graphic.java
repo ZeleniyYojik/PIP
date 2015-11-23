@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.FontRenderContext;
-import java.util.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashSet;
+import java.util.Set;
 
-import static java.lang.Thread.*;
+import static java.lang.Thread.sleep;
 
 /**
  * Created by panikun on 29.10.15.
@@ -157,7 +160,7 @@ public class Graphic extends JPanel {
                 if (point.needAnimation) {
                     point.animation = new Thread(new Animation(point, this.kontur.R, this.scale));
                     point.animation.start();
-                    point.needAnimation=false;
+                    point.needAnimation = false;
                 } else {
                     point.repaint();
                 }
@@ -165,52 +168,54 @@ public class Graphic extends JPanel {
         }
     }
 }
-    class Animation implements Runnable{
-        Ponto point;
-        double R;
-        int scale;
 
-        public Animation(Ponto point,double radius,int scale){
-            this.point=point;
-            this.R=radius;
-            this.scale=scale;
-        }
+class Animation implements Runnable {
+    Ponto point;
+    double R;
+    int scale;
 
-        @Override
-        public void run() {
-            while(!Thread.interrupted()) {
-                resize(10);
-                try {
-                    sleep(200);
-                } catch (InterruptedException e) {
-                    point.setRadius(Task5.POINT_RADIUS);
-                    point.repaint();
-                    return;
-                }
-                resize(15);
-                try {
-                    sleep(200);
-                } catch (InterruptedException e) {
-                    point.setRadius(Task5.POINT_RADIUS);
-                    point.repaint();
-                    return;
-                }
-                resize(20);
-                try {
-                    sleep(200);
-                } catch (InterruptedException e) {
-                    point.setRadius(Task5.POINT_RADIUS);
-                    point.repaint();
-                    return;
-                }
+    public Animation(Ponto point, double radius, int scale) {
+        this.point = point;
+        this.R = radius;
+        this.scale = scale;
+    }
+
+    @Override
+    public void run() {
+        while (!Thread.interrupted()) {
+            resize(10);
+            try {
+                sleep(200);
+            } catch (InterruptedException e) {
+                point.setRadius(Task5.POINT_RADIUS);
+                point.repaint();
+                return;
             }
-            point.setRadius(Task5.POINT_RADIUS);
-            point.repaint();
+            resize(15);
+            try {
+                sleep(200);
+            } catch (InterruptedException e) {
+                point.setRadius(Task5.POINT_RADIUS);
+                point.repaint();
+                return;
+            }
+            resize(20);
+            try {
+                sleep(200);
+            } catch (InterruptedException e) {
+                point.setRadius(Task5.POINT_RADIUS);
+                point.repaint();
+                return;
+            }
         }
-        void resize(double div){
-            this.point.setRadius((int) (R / div * scale)+1);
-            point.repaint();
+        point.setRadius(Task5.POINT_RADIUS);
+        point.repaint();
+    }
 
-        }
+    void resize(double div) {
+        this.point.setRadius((int) (R / div * scale) + 1);
+        point.repaint();
+
+    }
 
 }
