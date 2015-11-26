@@ -5,9 +5,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-/**
- * Created by panikun on 22.11.15.
- */
+
 public class RequestSender implements Runnable {
     public static final int PORT = 11111;
     //Socket socket;

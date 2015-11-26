@@ -9,22 +9,17 @@ public class RequestHandler extends Thread {
     Socket client;
 
     RequestHandler(Socket client) {
-
         this.client = client;
         this.start();
     }
 
     @Override
     public void run() {
-
         String message;
-
-
         try (
                 InputStreamReader ir = new InputStreamReader(client.getInputStream());
                 BufferedReader br = new BufferedReader(ir);
                 PrintStream ps = new PrintStream(client.getOutputStream())
-
         ) {
             message = br.readLine();
             String[] par = message.split(";");
@@ -53,5 +48,4 @@ public class RequestHandler extends Thread {
         }
 
     }
-
 }
