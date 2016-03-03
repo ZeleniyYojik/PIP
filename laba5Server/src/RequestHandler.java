@@ -1,13 +1,8 @@
 import java.io.*;
 import java.net.Socket;
 
-
-/**
- * Created by panikun on 22.11.15.
- */
 public class RequestHandler extends Thread {
     Socket client;
-
     RequestHandler(Socket client) {
         this.client = client;
         this.start();
@@ -19,10 +14,12 @@ public class RequestHandler extends Thread {
         try (
                 InputStreamReader ir = new InputStreamReader(client.getInputStream());
                 BufferedReader br = new BufferedReader(ir);
-                PrintStream ps = new PrintStream(client.getOutputStream())
+                PrintStream ps = new PrintStream(client.getOutputStream());
+                ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
         ) {
             message = br.readLine();
             String[] par = message.split(";");
+            oos.writeObject(client);
 
             if (par.length != 3) {
                 System.err.println("Неверный формат сообщения");

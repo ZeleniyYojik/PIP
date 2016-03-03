@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -23,12 +20,12 @@ public class RequestSender implements Runnable {
     public void run() {
         this.y = (float) point.Y;
         this.x = (float) point.X;
+        Socket sock =null;
         String message;
         try (
                 Socket socket = new Socket("localhost", RequestSender.PORT);
                 PrintStream pr = new PrintStream(socket.getOutputStream());
                 BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
         ) {
             pr.println(x + ";" + y + ";" + r);
             message = br.readLine();

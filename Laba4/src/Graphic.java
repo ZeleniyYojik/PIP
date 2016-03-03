@@ -20,7 +20,6 @@ public class Graphic extends JPanel{
     private int height;
     private int width;
     private int scale;
-    int ris = 0;
     public Graphic() {
         this.setDoubleBuffered(true);
         this.setLayout(null);
