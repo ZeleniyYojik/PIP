@@ -2,6 +2,7 @@
 if ($_SERVER['REQUEST_METHOD']=='GET') {
 	require_once 'HTML/Table.php';
 	define('ST_T', microtime());//начало 
+	//@ отключаем вывод ошибок
 	@$X=$_GET['XSelector'];
 	@$Y=$_GET['YSelector'];//array
 	@$R=$_GET['RSelector'];
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 		}
 	}
 
-
+	//создаем таблицу
 	$attrs = array('width' => '600');
 	$attrs['align']='center';
 	$table = new HTML_Table($attrs);
@@ -57,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 	$hrAttrs = array('bgcolor' => 'silver');
 	$table->setRowAttributes(0, $hrAttrs, true);
 	$table->setColAttributes(0, $hrAttrs);
-
+	//выводим таблицу и время
 	echo $table->toHtml();
 	echo '<div style="text-align:center; margin-top:30px">'.date("Текущие дата и время: d/m/y H:i:s")."</div>";
 	printf("<br/>".'<div style="text-align:center">Время выполнения скрипта %.5f сек.'.'</div>', microtime()-ST_T);//
@@ -65,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 ?>
 <?php
 	function inFigure($X, $Y, $R){
+		//				Первая четверть										Вторая четверть																Четвертая четверть
 		return (($X>=0 && $X<=($R/2) && $Y>=0 && $Y<=$R) || ($X<=0 && $X>=(-$R/2) && $Y>=0 && $Y<=($R/2) && ($Y-$X)<=($R/2)) || ($X>=0 && $X<=($R/2) && $Y<=0 && $Y>=(-$R/2) && (($X*$X+$Y*$Y)<=($R*$R))));
 	}
 ?>

@@ -7,39 +7,66 @@
 <body>
 <div class="wrapper">
 	<header>
-		<p>Пашнин Александр Денисович</p>
+		<p style="font-size: 40px">Пашнин Александр Денисович</p>
 		<p>Группа P3217</p>
 		<p>Вариант 1707</p>
 	</header>
-	<div class="contentDiv">
-		<form action="lab6.php" method="GET">
-			<p>Значение X:
-				<input type="text" name="XSelector" placeholder="-3..5" required>
-			</p>
-			<p>Значение Y:
-				<input type="checkbox" name="YSelector[]" value="-2">-2
-				<input type="checkbox" name="YSelector[]" value="-1.5">-1.5
-				<input type="checkbox" name="YSelector[]" value="-1">-1
-				<input type="checkbox" name="YSelector[]" value="-0.5">-0.5
-				<input type="checkbox" name="YSelector[]" value="0">0
-				<input type="checkbox" name="YSelector[]" value="0.5">0.5
-				<input type="checkbox" name="YSelector[]" value="1">1
-				<input type="checkbox" name="YSelector[]" value="1.5">1.5
-				<input type="checkbox" name="YSelector[]" value="2">2
-			</p>
-			<p>Выбрать R и подтвердить данные:
-				<button type="submit" name="RSelector" value="1">1</button>
-				<button type="submit" name="RSelector" value="2">2</button>
-				<button type="submit" name="RSelector" value="3">3</button>
-				<button type="submit" name="RSelector" value="4">4</button>
-				<button type="submit" name="RSelector" value="5">5</button>
-			</p>
-		</form>
+	<div class="content">
+		<div class="inputs">
+			<form action="lab6.php" method="GET">
+				<p>Значение X:
+					<input type="text" name="XSelector" placeholder="-3..5" required>
+				</p>
+				<p>Значение Y:
+					<input type="checkbox" name="YSelector[]" value="-2">-2
+					<input type="checkbox" name="YSelector[]" value="-1.5">-1.5
+					<input type="checkbox" name="YSelector[]" value="-1">-1
+					<input type="checkbox" name="YSelector[]" value="-0.5">-0.5
+					<input type="checkbox" name="YSelector[]" value="0">0
+					<input type="checkbox" name="YSelector[]" value="0.5">0.5
+					<input type="checkbox" name="YSelector[]" value="1">1
+					<input type="checkbox" name="YSelector[]" value="1.5">1.5
+					<input type="checkbox" name="YSelector[]" value="2">2
+				</p>
+				<p>Выбрать R и подтвердить данные:
+					<button type="submit" name="RSelector" value="1">1</button>
+					<button type="submit" name="RSelector" value="2">2</button>
+					<button type="submit" name="RSelector" value="3">3</button>
+					<button type="submit" name="RSelector" value="4">4</button>
+					<button type="submit" name="RSelector" value="5">5</button>
+				</p>
+			</form>
+		</div>
+		<div class="area">
+		<img src="area.png">
+		</div>
 	</div>
 </div>
 </body>
 </html>
 <style>	
+	.content{
+		margin-top: 50px;
+	}
+	.inputs{
+		width: 50%;
+		float: left;
+		padding-top: 50px;
+	}
+	.area{
+		width: 50%;
+		float: right;
+		padding: auto;
+		text-align: center;
+	}
+	.area::before{
+		content: "Область:";
+		display: block;
+	}
+	.wrapper{
+		margin: auto;
+		width: 980px;
+	}
 	header>p{
 		font-family: sans-serif;
 		width: 300px;
@@ -48,8 +75,11 @@
 		margin: auto;
 		color: #004dff;
 	}
+	form{
+		font-family: sans-serif;
+	}
 	header>p:first-child{
-		font-size: 25px;
+		font-size: 25px !important;
 	}
 	header>p:nth-child(2){
 		font-size: 20px;
