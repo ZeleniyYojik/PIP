@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 if ($_SERVER['REQUEST_METHOD']=='GET') {
 	require_once 'HTML/Table.php';
 	define('ST_T', microtime());//начало 
@@ -69,4 +69,4 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 		//				Первая четверть										Вторая четверть																Четвертая четверть
 		return (($X>=0 && $X<=($R/2) && $Y>=0 && $Y<=$R) || ($X<=0 && $X>=(-$R/2) && $Y>=0 && $Y<=($R/2) && ($Y-$X)<=($R/2)) || ($X>=0 && $X<=($R/2) && $Y<=0 && $Y>=(-$R/2) && (($X*$X+$Y*$Y)<=($R*$R))));
 	}
-?>
+?> -->
