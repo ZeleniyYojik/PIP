@@ -2,46 +2,56 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<title>ПИП Лаба №6</title>
 </head>
 <body>
-<div class="wrapper">
-	<header>
-		<p style="font-size: 40px">Пашнин Александр Денисович</p>
-		<p>Группа P3217</p>
-		<p>Вариант 1707</p>
-	</header>
-	<div class="content">
-		<div class="inputs">
-			<form action="lab6.php" method="GET">
-				<p>Значение X:
-					<input type="text" name="XSelector" placeholder="-3..5" required>
-				</p>
-				<p>Значение Y:
-					<input type="checkbox" name="YSelector[]" value="-2">-2
-					<input type="checkbox" name="YSelector[]" value="-1.5">-1.5
-					<input type="checkbox" name="YSelector[]" value="-1">-1
-					<input type="checkbox" name="YSelector[]" value="-0.5">-0.5
-					<input type="checkbox" name="YSelector[]" value="0">0
-					<input type="checkbox" name="YSelector[]" value="0.5">0.5
-					<input type="checkbox" name="YSelector[]" value="1">1
-					<input type="checkbox" name="YSelector[]" value="1.5">1.5
-					<input type="checkbox" name="YSelector[]" value="2">2
-				</p>
-				<p>Выбрать R и подтвердить данные:
-					<button type="submit" name="RSelector" value="1">1</button>
-					<button type="submit" name="RSelector" value="2">2</button>
-					<button type="submit" name="RSelector" value="3">3</button>
-					<button type="submit" name="RSelector" value="4">4</button>
-					<button type="submit" name="RSelector" value="5">5</button>
-				</p>
-			</form>
-		</div>
-		<div class="area">
-		<img src="area.png">
+<script>
+			$(document).ready(function() {
+				var $chb = $('input.chb');
+				$chb.click(function() {
+					$chb.prop('checked', false);
+					$(this).prop('checked', true);
+				});
+			});
+		</script>
+	<div class="wrapper">
+		<header>
+			<p style="font-size: 40px">Пашнин Александр Денисович</p>
+			<p>Группа P3217</p>
+			<p>Вариант 1707</p>
+		</header>
+		<div class="content">
+			<div class="inputs">
+				<form action="lab6.php" method="GET">
+					<p>Значение X:
+						<input type="text" name="XSelector" placeholder="-3..5" required>
+					</p>
+					<p>Значение Y:
+						<input type="checkbox" name="YSelector" class= "chb" value="-2">-2
+						<input type="checkbox" name="YSelector" class= "chb" value="-1.5">-1.5
+						<input type="checkbox" name="YSelector" class= "chb" value="-1">-1
+						<input type="checkbox" name="YSelector" class= "chb" value="-0.5">-0.5
+						<input type="checkbox" name="YSelector" class= "chb" value="0">0
+						<input type="checkbox" name="YSelector" class= "chb" value="0.5">0.5
+						<input type="checkbox" name="YSelector" class= "chb" value="1">1
+						<input type="checkbox" name="YSelector" class= "chb" value="1.5">1.5
+						<input type="checkbox" name="YSelector" class= "chb" value="2">2
+					</p>
+					<p>Выбрать R и подтвердить данные:
+						<button type="submit" name="RSelector" value="1">1</button>
+						<button type="submit" name="RSelector" value="2">2</button>
+						<button type="submit" name="RSelector" value="3">3</button>
+						<button type="submit" name="RSelector" value="4">4</button>
+						<button type="submit" name="RSelector" value="5">5</button>
+					</p>
+				</form>
+			</div>
+			<div class="area">
+			<img src="area.png">
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>
 <style>	
