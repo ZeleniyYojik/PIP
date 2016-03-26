@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ПИП Лаба №7</title>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <p>Пашнин Александр Денисович</p>
+        <p>Группа P3217</p>
+        <p>Вариант 1720</p>
+    </header>
+    <div class="content">
+        <div class="inputs">
+           <form method="POST" action="/lab7/main">
+                <p>X value:
+                <input type="text" id="text" name="XSelector" placeholder="-3..5" oninput="validateX(this)" required>
+                </p>
+                <p>Y value:
+                <input type="text" id="text" name="YSelector" placeholder="-5..3" oninput="validateY(this)" required>
+                </p>
+                <p>R value:<select name="RSelector">
+                <option>1</option>
+                <option>1.5</option>
+                <option>2</option>
+                <option>2.5</option>
+                <option>3</option>
+                </select></p>
+                <button type="submit" name="submit">OK</button>
+                </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    document.getElementById("text").onkeypress= function(event){
+        event= event || window.event;
+        if (event.charCode && (event.charCode < 47 || event.charCode==45 || event.charCode==47 || event.charCode > 57)){// проверка на event.charCode - чтобы пользователь мог нажать backspace, enter, стрелочку назад...
+                if (event.charCode!=44  && event.charCode!=46/* && (document.getElementById(textX).value. )*/) {
+                return false;
+                }
+        }
+    };
+</script>
+<style> 
+    .content{
+        margin-top: 50px;
+    }
+    .inputs{
+        width: 50%;
+        float: left;
+        padding-top: 50px;
+    }
+    .wrapper{
+        margin: auto;
+        width: 980px;
+    }
+    header>p{
+        font-family: sans-serif;
+        width: 300px;
+        padding: 5px;
+        text-align: center;
+        margin: auto;
+        color: #004dff;
+    
+}   
+form{
+        font-family: sans-serif;
+    }
+    header>p:first-child{
+        font-size: 25px !important;
+    }
+    header>p:nth-child(2){
+        font-size: 20px;
+    }
+    header>p:nth-child(3){
+        font-size: 18px;
+    }
+    form>p>input,button,select{
+        margin-left: 10px;
+    }
+    form>p>button{
+        width: 30px;
+        height: 30px;
+    }
+</style>
