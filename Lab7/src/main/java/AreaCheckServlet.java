@@ -32,23 +32,42 @@ public class AreaCheckServlet extends HttpServlet {
                     "</head>\n" +
                     "<body>\n" +
                     "    <p>Неверные данные</p>\n" +
-                    "    <p>X должен быть числом {-3..5}. X="+X+"</p>\n" +
-                    "    <p>Y должен быть числом {-5..3}. Y="+Y+"</p>\n" +
-                    "    <p>R должен быть положительным числом. R="+R+"</p>\n" +
+                    "    <p>X должен быть числом {-3..5}. X="+XBuf+"</p>\n" +
+                    "    <p>Y должен быть числом {-5..3}. Y="+YBuf+"</p>\n" +
+                    "    <p>R должен быть положительным числом. R="+RBuf+"</p>\n" +
                     "</body>\n" +
                     "</html>");
             out.close();
             return;
         }
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Lab7</title>");
-        out.println("<meta charset=\"utf-8\">");
-        out.println("</head>");
-        out.println("<body bgcolor=\"white\">");
-
-        out.println("</body>");
-        out.println("</html>");
+       out.print("<!DOCTYPE html>\n" +
+               "<html lang=\"en\">\n" +
+               "<head>\n" +
+               "    <meta charset=\"UTF-8\">\n" +
+               "    <title>ПИП Лаба №7</title>\n" +
+               "</head>\n" +
+               "<body>\n" +
+               "\t\t<table align='center'>\n" +
+               "\t\t        <tr>\n" +
+               "\t\t            <td>X: </td>\n" +
+               "\t\t            <td>"+X+"</td>\n" +
+               "\t\t        </tr>\n" +
+               "\t\t        <tr>\n" +
+               "\t\t            <td>Y: </td>\n" +
+               "\t\t            <td>"+Y+"</td>\n" +
+               "\t\t        </tr>\n" +
+               "\t\t        <tr>\n" +
+               "\t\t            <td>R: </td>\n" +
+               "\t\t            <td>"+R+"</td>\n" +
+               "\t\t         <tr>\n" +
+               "\t\t            <td>In area: </td>\n" +
+               "\t\t            <td>" + (inFigure(X, Y, R)? "Yes" : "No")  +"</td>\n" +
+               "\t\t        </tr>\n" +
+               "\t\t</table>\n"     +
+               "\t\t<p  align=\"center\"><a href=\"/lab7/main\">Вернуться</a></p>"+
+               "</body>\n" +
+               "</html>");
+        out.close();
     }
 
     boolean inFigure(float X, float Y, float R) {

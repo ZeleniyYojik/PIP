@@ -13,12 +13,12 @@
     </header>
     <div class="content">
         <div class="inputs">
-           <form method="POST" action="/lab7/main">
-                <p>X value:
-                <input type="text" id="text" name="XSelector" placeholder="-3..5" oninput="validateX(this)" required>
+           <form method="POST" id="forma" action="/lab7/main">
+                <p>X value {-3..5}:
+                <input type="text" id="textX" name="XSelector" placeholder="-3..5" onchange="validateForm()" onkeydown="javascript:if(13==event.keyCode){return false;}" required>
                 </p>
-                <p>Y value:
-                <input type="text" id="text" name="YSelector" placeholder="-5..3" oninput="validateY(this)" required>
+                <p>Y value {-5..3}:
+                <input type="text" id="textY" name="YSelector" placeholder="-5..3" onchange="validateForm()" onkeydown="javascript:if(13==event.keyCode){return false;}" required>
                 </p>
                 <p>R value:<select name="RSelector">
                 <option>1</option>
@@ -27,7 +27,7 @@
                 <option>2.5</option>
                 <option>3</option>
                 </select></p>
-                <button type="submit" name="submit">OK</button>
+                <button type="submit" id="ok" name="submit">OK</button>
                 </form>
         </div>
     </div>
@@ -35,14 +35,43 @@
 </body>
 </html>
 <script>
-    document.getElementById("text").onkeypress= function(event){
-        event= event || window.event;
-        if (event.charCode && (event.charCode < 47 || event.charCode==45 || event.charCode==47 || event.charCode > 57)){// проверка на event.charCode - чтобы пользователь мог нажать backspace, enter, стрелочку назад...
-                if (event.charCode!=44  && event.charCode!=46/* && (document.getElementById(textX).value. )*/) {
-                return false;
-                }
-        }
-    };
+    // function validateX(text){
+    //     var x_val=text.value;
+    //     if ( (x_val == "") || !(!isNaN(parseFloat(x_val)) && isFinite(x_val)) || (x_val > 5) || (x_val < -3)) {
+    //         document.getElementById("ok").disabled=true;
+    //     }else{
+    //         document.getElementById("ok").disabled=false;
+    //     }
+    // }
+    // function validateY(text){
+    //     var y_val=text.value;
+    //     if ( (y_val == "") || !(!isNaN(parseFloat(y_val)) && isFinite(y_val)) || (y_val > 3) || (y_val < -5)) {
+    //         document.getElementById("ok").disabled=true;
+    //     }else{
+    //         document.getElementById("ok").disabled=false;
+    //     }
+    // }
+    function validateForm(){
+        var x_val=document.getElementById("textX").value;
+        var y_val=document.getElementById("textY").value;
+        x_val=x_val.replace(",",".");
+        y_val=y_val.replace(",",".");
+        var x_valid=!((x_val == "") || !(!isNaN(parseFloat(x_val)) && isFinite(x_val)) || (x_val > 5) || (x_val < -3));
+        var y_valid=!((y_val == "") || !(!isNaN(parseFloat(y_val)) && isFinite(y_val)) || (y_val > 3) || (y_val < -5));
+        if (x_valid&&y_valid) {
+            document.getElementById("ok").disabled=false;
+         }else{
+            document.getElementById("ok").disabled=true;
+         }
+    }
+//     document.getElementById("textX").onchange= function(this){
+//         event= event || window.event;
+//         if (event.charCode && (event.charCode < 47 || event.charCode==45 || event.charCode==47 || event.charCode > 57)){// проверка на event.charCode - чтобы пользователь мог нажать backspace, enter, стрелочку назад...
+//                 if (event.charCode!=44  && event.charCode!=46/* && (document.getElementById(textX).value. )*/) {
+//                 return false;
+//                 }
+//         }   
+//     };
 </script>
 <style> 
     .content{
@@ -75,7 +104,7 @@ form{
     header>p:nth-child(2){
         font-size: 20px;
     }
-    header>p:nth-child(3){
+    header>p:nth-child(3){  
         font-size: 18px;
     }
     form>p>input,button,select{

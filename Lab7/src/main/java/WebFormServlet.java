@@ -26,12 +26,12 @@ public class WebFormServlet extends HttpServlet {
                 "    </header>\n" +
                 "    <div class=\"content\">\n" +
                 "        <div class=\"inputs\">\n" +
-                "           <form method=\"POST\" action=\"/lab7/main\">\n" +
-                "                <p>X value:\n" +
-                "                <input type=\"text\" id=\"text\" name=\"XSelector\" placeholder=\"-3..5\" oninput=\"validateX(this)\" required>\n" +
+                "           <form method=\"POST\" id=\"forma\" action=\"/lab7/main\">\n" +
+                "                <p>X value {-3..5}:\n" +
+                "                <input type=\"text\" id=\"textX\" name=\"XSelector\" placeholder=\"-3..5\" onchange=\"validateForm()\" onkeydown=\"javascript:if(13==event.keyCode){return false;}\" required>\n" +
                 "                </p>\n" +
-                "                <p>Y value:\n" +
-                "                <input type=\"text\" id=\"text\" name=\"YSelector\" placeholder=\"-5..3\" oninput=\"validateY(this)\" required>\n" +
+                "                <p>Y value {-5..3}:\n" +
+                "                <input type=\"text\" id=\"textY\" name=\"YSelector\" placeholder=\"-5..3\" onchange=\"validateForm()\" onkeydown=\"javascript:if(13==event.keyCode){return false;}\" required>\n" +
                 "                </p>\n" +
                 "                <p>R value:<select name=\"RSelector\">\n" +
                 "                <option>1</option>\n" +
@@ -40,7 +40,7 @@ public class WebFormServlet extends HttpServlet {
                 "                <option>2.5</option>\n" +
                 "                <option>3</option>\n" +
                 "                </select></p>\n" +
-                "                <button type=\"submit\" name=\"submit\">OK</button>\n" +
+                "                <button type=\"submit\" id=\"ok\" name=\"submit\">OK</button>\n" +
                 "                </form>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
@@ -48,14 +48,19 @@ public class WebFormServlet extends HttpServlet {
                 "</body>\n" +
                 "</html>\n" +
                 "<script>\n" +
-                "    document.getElementById(\"text\").onkeypress= function(event){\n" +
-                "        event= event || window.event;\n" +
-                "        if (event.charCode && (event.charCode < 47 || event.charCode > 57)){" +
-                "                if (event.charCode!=44  && event.charCode!=46 && event.charCode!=45 ) {\n" +
-                "                return false;\n" +
-                "                }\n" +
-                "        }\n" +
-                "    };\n" +
+                "    function validateForm(){\n" +
+                "        var x_val=document.getElementById(\"textX\").value;\n" +
+                "        var y_val=document.getElementById(\"textY\").value;\n" +
+                "        x_val=x_val.replace(\",\",\".\");\n" +
+                "        y_val=y_val.replace(\",\",\".\");\n" +
+                "        var x_valid=!((x_val == \"\") || !(!isNaN(parseFloat(x_val)) && isFinite(x_val)) || (x_val > 5) || (x_val < -3));\n" +
+                "        var y_valid=!((y_val == \"\") || !(!isNaN(parseFloat(y_val)) && isFinite(y_val)) || (y_val > 3) || (y_val < -5));\n" +
+                "        if (x_valid&&y_valid) {\n" +
+                "            document.getElementById(\"ok\").disabled=false;\n" +
+                "         }else{\n" +
+                "            document.getElementById(\"ok\").disabled=true;\n" +
+                "         }\n" +
+                "    }\n" +
                 "</script>\n" +
                 "<style> \n" +
                 "    .content{\n" +
@@ -88,7 +93,7 @@ public class WebFormServlet extends HttpServlet {
                 "    header>p:nth-child(2){\n" +
                 "        font-size: 20px;\n" +
                 "    }\n" +
-                "    header>p:nth-child(3){\n" +
+                "    header>p:nth-child(3){  \n" +
                 "        font-size: 18px;\n" +
                 "    }\n" +
                 "    form>p>input,button,select{\n" +
