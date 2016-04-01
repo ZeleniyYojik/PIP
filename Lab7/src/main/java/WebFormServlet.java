@@ -43,6 +43,9 @@ public class WebFormServlet extends HttpServlet {
                 "                <button type=\"submit\" id=\"ok\" name=\"submit\">OK</button>\n" +
                 "                </form>\n" +
                 "        </div>\n" +
+                "        <div class=\"area\">\n" +
+                "        <img src=\"https://i.imgur.com/IR8BxND.png?1\">\n" +
+                "        </div>\n" +
                 "    </div>\n" +
                 "</div>\n" +
                 "</body>\n" +
@@ -74,6 +77,16 @@ public class WebFormServlet extends HttpServlet {
                 "    .wrapper{\n" +
                 "        margin: auto;\n" +
                 "        width: 980px;\n" +
+                "    }\n" +
+                "    .area{\n" +
+                "        width: 50%;\n" +
+                "        float: right;\n" +
+                "        padding: auto;\n" +
+                "        text-align: center;\n" +
+                "    }\n" +
+                "    .area::before{\n" +
+                "        content: \"Область:\";\n" +
+                "        display: block;\n" +
                 "    }\n" +
                 "    header>p{\n" +
                 "        font-family: sans-serif;\n" +
