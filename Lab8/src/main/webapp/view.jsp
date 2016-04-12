@@ -21,6 +21,11 @@
         <p>Вариант 1727</p>
     </header>
     <div class="content">
+        <p><strong><%
+            if (session.getAttribute("success") != null) {%>
+            <%=session.getAttribute("success")%>
+            <%}%>
+        </strong></p>
         <div class="inputs">
             <form method="GET" action="/lab8/main">
                 <p>X value:

@@ -23,22 +23,28 @@ public class AreaCheckServlet extends HttpServlet {
         double X = Double.NaN;
         double Y = Double.NaN;
         double R = Double.NaN;
+        boolean ok = true;
         try {
             X = Double.parseDouble(XBuf);
             Y = Double.parseDouble(YBuf);
             R = Double.parseDouble(RBuf);
+            if (!validate(X, Y, R)) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException e) {
-
+            session.setAttribute("success", "Something was wrong with your parameters! Please check them and try again! " +
+                    "\nRemember that they must be numeric and r must be more than 0!");
+            ok = false;
         }
-        if (!validate(X, Y, R)) {
-            return;
-        }
-        if (res == null) {
-            res = new ArrayList<Result>();
-            res.add(new Result(X, Y, R, inFigure(X, Y, R)));
-            session.setAttribute("results", res);
-        } else {
-            res.add(new Result(X, Y, R, inFigure(X, Y, R)));
+        if (ok) {
+            session.setAttribute("success", "Your request was successful! See table for results!");
+            if (res == null) {
+                res = new ArrayList<Result>();
+                res.add(new Result(X, Y, R, inFigure(X, Y, R)));
+                session.setAttribute("results", res);
+            } else {
+                res.add(new Result(X, Y, R, inFigure(X, Y, R)));
+            }
         }
         resp.sendRedirect("/lab8/view.jsp");
     }
