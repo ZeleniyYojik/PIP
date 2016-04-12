@@ -49,7 +49,7 @@
             </form>
         </div>
         <div class="area">
-            <p><img name='img' src='http://i.imgur.com/NYTtEHF.png' id="graph" style="position: relative;"/></p>
+            <p><img name='img' src='http://i.imgur.com/udFHgyb.png' id="graph" style="position: relative;"/></p>
         </div>
         <table border="1" style="border-color: lightsteelblue">
             <caption>Result table</caption>

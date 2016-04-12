@@ -42,22 +42,17 @@ function rSelected(btn) {
 }
 
 $(document).ready(function () {
-    document.getElementById('graph').onclick = function (e) {
+    document.getElementById("graph").onclick = function (e) {
         var x = e.offsetX == undefined ? e.layerX : e.offsetX - 100;
         var y = e.offsetY == undefined ? e.layerY : e.offsetY;
         if (y <= 100)
             y = 100 - y;
         else
             y = -y + 100;
-        var radios = document.getElementsByTagName('input');
-        var r;
-        for (var i = 0; i < radios.length; i++) {
-            if (radios[i].type === 'radio' && radios[i].checked && radios[i].name === 'R') {
-                r = radios[i].value;
-            }
-        }
-        if (!isNaN(r)) {
-            var k = r * 1.25;
+        var rad = parseFloat(document.getElementById("hiddenR").value);
+
+        if (!isNaN(rad)) {
+            var k = rad * 1.25;
             var l = document.img.width / 2;
             y = y * k / l;
             x = x * k / l;
@@ -65,6 +60,6 @@ $(document).ready(function () {
             alert("Set R first!");
             return;
         }
-        window.location = "../lab8-1.0?XSelector=" + x + "&YSelector=" + y + "&RSelector=" + r;
+        window.location = "../lab8/main?XSelector=" + x + "&YSelector=" + y + "&RSelector=" + rad;
     }
 });

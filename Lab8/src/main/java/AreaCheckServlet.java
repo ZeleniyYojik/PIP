@@ -20,13 +20,13 @@ public class AreaCheckServlet extends HttpServlet {
         String XBuf = req.getParameter("XSelector").replace(',', '.');
         String YBuf = req.getParameter("YSelector").replace(',', '.');
         String RBuf = req.getParameter("RSelector").replace(',', '.');
-        float X = Float.NaN;
-        float Y = Float.NaN;
-        float R = Float.NaN;
+        double X = Double.NaN;
+        double Y = Double.NaN;
+        double R = Double.NaN;
         try {
-            X = Float.parseFloat(XBuf);
-            Y = Float.parseFloat(YBuf);
-            R = Float.parseFloat(RBuf);
+            X = Double.parseDouble(XBuf);
+            Y = Double.parseDouble(YBuf);
+            R = Double.parseDouble(RBuf);
         } catch (NumberFormatException e) {
 
         }
@@ -43,13 +43,13 @@ public class AreaCheckServlet extends HttpServlet {
         resp.sendRedirect("/lab8/view.jsp");
     }
 
-    boolean inFigure(float X, float Y, float R) {
+    boolean inFigure(double X, double Y, double R) {
         return ((Y >= 0 && X >= 0 && Y <= R - X)
                 || (Y >= 0 && X <= 0 && (R / 2) * (R / 2) >= X * X + Y * Y)
                 || (Y <= 0 && Y >= -R && X <= 0 && X >= -R));
     }
 
-    boolean validate(float X, float Y, float R) {
-        return (!Float.isNaN(X) && !Float.isNaN(Y) && !Float.isNaN(R) && R > 0 && X <= 5 && X >= -3 && Y <= 3 && Y >= -5);
+    boolean validate(double X, double Y, double R) {
+        return (!Double.isNaN(X) && !Double.isNaN(Y) && !Double.isNaN(R) && R > 0 && Y <= 5 && Y >= -3);
     }
 }
