@@ -1,15 +1,22 @@
+import tools.Result;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession(true);
+        List<Result> res = (ArrayList<Result>) session.getAttribute("results");
+
         String XBuf = req.getParameter("XSelector").replace(',', '.');
         String YBuf = req.getParameter("YSelector").replace(',', '.');
         String RBuf = req.getParameter("RSelector").replace(',', '.');
@@ -21,11 +28,19 @@ public class AreaCheckServlet extends HttpServlet {
             Y = Float.parseFloat(YBuf);
             R = Float.parseFloat(RBuf);
         } catch (NumberFormatException e) {
+
         }
-        PrintWriter out = resp.getWriter();
-        if (!validate(X,Y,R)){
+        if (!validate(X, Y, R)) {
             return;
         }
+        if (res == null) {
+            res = new ArrayList<Result>();
+            res.add(new Result(X, Y, R, inFigure(X, Y, R)));
+            session.setAttribute("results", res);
+        } else {
+            res.add(new Result(X, Y, R, inFigure(X, Y, R)));
+        }
+        resp.sendRedirect("/lab8/view.jsp");
     }
 
     boolean inFigure(float X, float Y, float R) {

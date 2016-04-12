@@ -51,6 +51,41 @@
         <div class="area">
             <p><img name = 'img' src = 'http://i.imgur.com/NYTtEHF.png' id="graph" style="position: relative;" /></p>
         </div>
+        <table border="1" style="border-color: lightsteelblue">
+            <caption>tools.Result table</caption>
+            <tr>
+                <td>X</td>
+                <td>Y</td>
+                <td>R</td>
+                <td>Contain</td>
+            </tr>
+            <%
+                ArrayList<Result> res = (ArrayList)application.getAttribute("results");
+                if (res == null)
+                    return;
+                else {
+                    for (int i=0; i < res.size(); i++)
+                    {
+            %>
+            <tr>
+                <td>
+                    <%= res.get(i).x %>
+                </td>
+                <td>
+                    <%= res.get(i).y %>
+                </td>
+                <td>
+                    <%= res.get(i).r %>
+                </td>
+                <td>
+                    <%= res.get(i).contain %>
+                </td>
+            </tr>
+            <%
+                    }
+                }
+            %>
+        </table>
     </div>
 </div>
 </body>
@@ -99,15 +134,9 @@
                     y=100-y;
                 else
                     y=-y+100;
-                var radios = document.getElementsByTagName('input');
-                var r;
-                for (var i = 0; i < radios.length; i++) {
-                    if (radios[i].type === 'radio' && radios[i].checked && radios[i].name === 'R') {
-                        r = radios[i].value;
-                    }
-                }
-                if (!isNaN(r)){
-                    var k = r * 1.25;
+                var rad = document.getElementById("hiddenR").value;
+                if (!isNaN(rad)){
+                    var k = rad * 1.25;
                     var l = document.img.width / 2;
                     y=y*k/l;
                     x=x*k/l;
@@ -115,7 +144,7 @@
                     alert("Set R first!");
                     return;
                 }
-                window.location = "../lab8-1.0?XSelector=" + x + "&YSelector=" + y + "&RSelector=" + r;
+                window.location = "../lab8/main?XSelector=" + x + "&YSelector=" + y + "&RSelector=" + rad;
             }
         </script>
 <style> 

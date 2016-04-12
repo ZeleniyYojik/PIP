@@ -1,0 +1,50 @@
+.content{
+    margin-top: 50px;
+}
+.inputs{
+    width: 50%;
+    float: left;
+    padding-top: 50px;
+}
+.wrapper{
+    margin: auto;
+    width: 980px;
+}
+.area{
+    width: 50%;
+    float: right;
+    padding: auto;
+    text-align: center;
+}
+.area::before{
+    content: "Area:";
+    display: block;
+}
+header>p{
+    font-family: sans-serif;
+    width: 300px;
+    padding: 5px;
+    text-align: center;
+    margin: auto;
+    color: #004dff;
+
+}
+form{
+    font-family: sans-serif;
+}
+header>p:first-child{
+    font-size: 25px !important;
+}
+header>p:nth-child(2){
+    font-size: 20px;
+}
+header>p:nth-child(3){
+    font-size: 18px;
+}
+form>p>input,button,select{
+    margin-left: 10px;
+}
+form>p>button{
+    width: 30px;
+    height: 30px;
+}
