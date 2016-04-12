@@ -2,7 +2,7 @@
 <%@ page import="tools.Result" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
-<%@include file="style.css" %>
+    <%@include file="style.css" %>
 </style>
 <html>
 <head>
@@ -61,9 +61,7 @@
             </tr>
             <%
                 ArrayList<Result> res = (ArrayList) session.getAttribute("results");
-                if (res == null)
-                    return;
-                else {
+                if (res != null) {
                     for (int i = 0; i < res.size(); i++) {
             %>
             <tr>
