@@ -9,4 +9,8 @@
         <pattern value="/main"/>
         <view-id value="/faces/MainPage.xhtml"/>
     </url-mapping>
+    <url-mapping id="start">
+        <pattern value="/"/>
+        <view-id value="/faces/StartPage.xhtml"/>
+    </url-mapping>
 </pretty-config>
