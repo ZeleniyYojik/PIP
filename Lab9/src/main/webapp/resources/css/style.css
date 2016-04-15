@@ -1,0 +1,30 @@
+div.content {
+    margin-top: 50px;
+}
+
+div.wrapper {
+    margin: auto;
+    width: 980px;
+}
+
+div.header > p {
+    font-family: sans-serif;
+    width: 300px;
+    padding: 5px;
+    text-align: center;
+    margin: auto;
+    color: #004dff;
+
+}
+
+div.header > p:first-child {
+    font-size: 25px !important;
+}
+
+div.header > p:nth-child(2) {
+    font-size: 20px;
+}
+
+div.header > p:nth-child(3) {
+    font-size: 18px;
+}
