@@ -5,6 +5,10 @@
 <web-app>
     <display-name>Lab9</display-name>
     <description>Pashnin Alexander 1737</description>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>start</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

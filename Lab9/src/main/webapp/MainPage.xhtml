@@ -4,7 +4,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Main page</title>
@@ -13,48 +14,50 @@
 
 <h:body>
     <h:form>
-        <h:selectBooleanCheckbox onselect="">-3</h:selectBooleanCheckbox>
-        <h:selectBooleanCheckbox>-2</h:selectBooleanCheckbox>
-        <h:selectBooleanCheckbox>-1</h:selectBooleanCheckbox>
-        <h:selectBooleanCheckbox>0</h:selectBooleanCheckbox>
-        <h:selectBooleanCheckbox>1</h:selectBooleanCheckbox>
-        <h:selectBooleanCheckbox>2</h:selectBooleanCheckbox>
-        <h:selectBooleanCheckbox>3</h:selectBooleanCheckbox>
-        <h:inputText id="Y" required="true">
+        <p:selectBooleanCheckbox>-3</p:selectBooleanCheckbox>
+        <p:selectBooleanCheckbox>-2</p:selectBooleanCheckbox>
+        <p:selectBooleanCheckbox>-1</p:selectBooleanCheckbox>
+        <p:selectBooleanCheckbox>0</p:selectBooleanCheckbox>
+        <p:selectBooleanCheckbox>1</p:selectBooleanCheckbox>
+        <p:selectBooleanCheckbox>2</p:selectBooleanCheckbox>
+        <p:selectBooleanCheckbox>3</p:selectBooleanCheckbox>
+        <p:inputText id="Y" required="true" requiredMessage="Value is required"
+                     onkeypress="if (event.keyCode == 13) {return false;}">
             <f:validator validatorId="validators.YValidator"/>
-        </h:inputText>
-        <h:message for="Y" style="color: red"/>
-        <h:selectOneRadio label="Select R">
+        </p:inputText>
+        <p:message for="Y" style="color: red"/>
+        <p:selectOneRadio label="Select R">
             <f:selectItem itemValue="1" itemLabel="1"/>
             <f:selectItem itemValue="2" itemLabel="2"/>
             <f:selectItem itemValue="3" itemLabel="3"/>
             <f:selectItem itemValue="4" itemLabel="4"/>
             <f:selectItem itemValue="5" itemLabel="5"/>
-        </h:selectOneRadio>
+        </p:selectOneRadio>
+        <p:commandButton id="submit" value="Submit" update="@(form)"/>
     </h:form>
-    <h:dataTable value="#{results.results}" var="res"
+    <p:dataTable value="#{results.results}" var="res"
                  styleClass="result-table"
                  headerClass="result-table-header"
                  rowClasses="result-table-odd-row, result-table-even-row">
-        <h:column>
+        <p:column>
             <f:facet name="header">X</f:facet>
             #{res.xCoord}
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">Y</f:facet>
             #{res.yCoord}
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">R</f:facet>
             #{res.radius}
-        </h:column>
-        <h:column>
+        </p:column>
+        <p:column>
             <f:facet name="header">In area</f:facet>
             #{res.inArea}
-        </h:column>
-    </h:dataTable>
+        </p:column>
+    </p:dataTable>
     <h:form>
-        <h:commandButton id="submit" action="toStart" value="Start page"/>
+        <p:commandButton id="goToStart" action="toStart" value="Start page"/>
     </h:form>
 </h:body>
 
