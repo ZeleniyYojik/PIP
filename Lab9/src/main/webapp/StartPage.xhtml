@@ -8,7 +8,7 @@
 
 <h:head>
     <title>Start page</title>
-    <h:outputStylesheet name="css/style.css"/>
+    <h:outputStylesheet name="css/startPageStyle.css"/>
 </h:head>
 
 <h:body>
@@ -28,7 +28,9 @@
                 #{clock.date}
             </div>
         </div>
-        <h:link value="Main page" outcome="MainPage"/>
+        <h:form>
+            <h:commandButton id="submit" action="toMain" value="Main page"/>
+        </h:form>
     </div>
 </h:body>
 

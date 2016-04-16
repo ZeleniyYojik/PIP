@@ -8,10 +8,19 @@
 
 <h:head>
     <title>Main page</title>
+    <h:outputStylesheet name="css/mainPageStyle.css"/>
 </h:head>
 
 <h:body>
-    <h:link value="Start page" outcome="StartPage"/>
+    <h:form>
+        <h:selectBooleanCheckbox/>
+        <h:selectBooleanCheckbox/>
+        <h:selectBooleanCheckbox/>
+        <h:selectBooleanCheckbox/>
+        <h:selectBooleanCheckbox/>
+        <h:selectBooleanCheckbox/>
+        <h:commandButton id="submit" action="toStart" value="Main page"/>
+    </h:form>
 </h:body>
 
 </html>
