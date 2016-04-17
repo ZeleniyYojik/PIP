@@ -16,7 +16,20 @@ public class ResultsBean implements Serializable {
         results.add(p);
     }
 
+    public static boolean contains(Point p) {
+        for (Point point : results) {
+            if (p.xCoord == point.xCoord && p.yCoord == point.yCoord && p.radius == point.radius) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Object getResults() {
+        return results;
+    }
+
+    public static List<Point> getRes(){
         return results;
     }
 }

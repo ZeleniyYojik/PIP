@@ -93,40 +93,62 @@ public class CheckBean {
     public void checkPoint() {
         double y = Double.parseDouble(Y.replace(',', '.'));
         double r = R;
+        //Пересчитваем значения существующих точек для текущего радиуса
+        for (Point p : ResultsBean.getRes()) {
+            p.setRadius(R);
+            p.setInArea(inArea(p.getxCoord(), p.getyCoord(), R));
+        }
+        //Самое стремное
+        //Надо проверить, есть ли такая точка уже в результатах
+        //Довольно затратно
         if (isXm3()) {
             double x = -3;
             Point point = new Point(x, y, r, inArea(x, y, r));
-            ResultsBean.addResult(point);
+            if (!ResultsBean.contains(point)) {
+                ResultsBean.addResult(point);
+            }
         }
         if (isXm2()) {
             double x = -2;
             Point point = new Point(x, y, r, inArea(x, y, r));
-            ResultsBean.addResult(point);
+            if (!ResultsBean.contains(point)) {
+                ResultsBean.addResult(point);
+            }
         }
         if (isXm1()) {
             double x = -1;
             Point point = new Point(x, y, r, inArea(x, y, r));
-            ResultsBean.addResult(point);
+            if (!ResultsBean.contains(point)) {
+                ResultsBean.addResult(point);
+            }
         }
         if (isX0()) {
             double x = 0;
             Point point = new Point(x, y, r, inArea(x, y, r));
-            ResultsBean.addResult(point);
+            if (!ResultsBean.contains(point)) {
+                ResultsBean.addResult(point);
+            }
         }
         if (isX3()) {
             double x = 3;
             Point point = new Point(x, y, r, inArea(x, y, r));
-            ResultsBean.addResult(point);
+            if (!ResultsBean.contains(point)) {
+                ResultsBean.addResult(point);
+            }
         }
         if (isX2()) {
             double x = 2;
             Point point = new Point(x, y, r, inArea(x, y, r));
-            ResultsBean.addResult(point);
+            if (!ResultsBean.contains(point)) {
+                ResultsBean.addResult(point);
+            }
         }
         if (isX1()) {
             double x = 1;
             Point point = new Point(x, y, r, inArea(x, y, r));
-            ResultsBean.addResult(point);
+            if (!ResultsBean.contains(point)) {
+                ResultsBean.addResult(point);
+            }
         }
     }
 
