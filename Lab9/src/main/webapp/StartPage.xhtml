@@ -22,6 +22,14 @@
         </div>
         <div class="content" style="text-align: center">
             <div class="clock">
+                <h:form id="clockForm" style="color: #004dff; font-family: sans-serif;margin-bottom: 20px;">
+                    <h:outputLabel id="clockLabel" value="#{clockTimer.date}"/>
+                    <h:commandButton id="clockTimerBtn" style="display: none" action="#{clockTimer.curDate}">
+                        <f:ajax render="txt_count"/>
+                        <f:ajax render="clockLabel"/>
+                    </h:commandButton>
+                    <h:outputScript name="js/clock.js"/>
+                </h:form>
                 <h:form>
                     <p:clock id="clock" mode="#{clock.mode}"/>
                     <br/>

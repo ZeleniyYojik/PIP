@@ -1,6 +1,8 @@
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "check")
+@ApplicationScoped
 public class CheckBean {
     /*Возможно, лучше было бы использовать
       selectManyCheckboxes
