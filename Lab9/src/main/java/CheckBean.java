@@ -94,10 +94,11 @@ public class CheckBean {
         double y = Double.parseDouble(Y.replace(',', '.'));
         double r = R;
         //Пересчитваем значения существующих точек для текущего радиуса
-        for (Point p : ResultsBean.getRes()) {
-            p.setRadius(R);
-            p.setInArea(inArea(p.getxCoord(), p.getyCoord(), R));
-        }
+        //Понадобится для динамической картинки, возможно. Пока не ясно как она должна выглядеть
+//        for (Point p : ResultsBean.getRes()) {
+//            p.setRadius(R);
+//            p.setInArea(inArea(p.getxCoord(), p.getyCoord(), R));
+//        }
         //Самое стремное
         //Надо проверить, есть ли такая точка уже в результатах
         //Довольно затратно
