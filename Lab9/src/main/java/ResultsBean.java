@@ -10,10 +10,10 @@ public class ResultsBean implements Serializable {
     private static List<Point> results = new ArrayList<Point>();
 
     public ResultsBean() {
-        results.add(new Point(1,2,3,true));
-        results.add(new Point(0,2,3,false));
-        results.add(new Point(2,2,3,true));
-        results.add(new Point(3,2,3,false));
+    }
+
+    public static void addResult(Point p) {
+        results.add(p);
     }
 
     public Object getResults() {

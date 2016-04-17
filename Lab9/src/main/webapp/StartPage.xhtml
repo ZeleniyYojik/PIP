@@ -6,12 +6,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Start page</title>
     <h:outputStylesheet name="css/startPageStyle.css"/>
-    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/themes/cupertino/skin.css"/>
 </h:head>
 
 <h:body>
@@ -22,13 +21,15 @@
             <p>Вариант 1737</p>
         </div>
         <div class="content">
-            <!--
-                Чет получается костыль, причем убогий
-                Надо либо JS, либо PrimeFaces
-                больше вариантов не нашел
-            -->
             <div class="clock">
-                #{clock.date}
+                <h:form>
+                    <p:clock id="clock" mode="#{clock.mode}"/>
+                    <p:selectOneMenu id="modeSelector" value="#{clock.mode}">
+                        <f:selectItem itemLabel="client time" itemValue="client"/>
+                        <f:selectItem itemLabel="server time" itemValue="server"/>
+                    </p:selectOneMenu>
+                    <p:commandButton value="Change mode" update="clock"/>
+                </h:form>
             </div>
         </div>
         <h:form>

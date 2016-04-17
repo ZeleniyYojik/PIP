@@ -1,5 +1,10 @@
+/*
+    Не совсем понял как эти стили работают с темами PrimeFaces
+    похоже что никак
+*/
 .result-table {
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
+
 }
 
 .result-table-header {
