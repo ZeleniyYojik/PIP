@@ -2,6 +2,15 @@
     Не совсем понял как эти стили работают с темами PrimeFaces
     похоже что никак
 */
+div.content {
+    margin-top: 50px;
+}
+
+div.wrapper {
+    margin: auto;
+    width: 980px;
+}
+
 .result-table {
     /*border-collapse: collapse;*/
 

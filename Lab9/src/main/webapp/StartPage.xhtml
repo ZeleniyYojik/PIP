@@ -20,21 +20,26 @@
             <p>Группа P3217</p>
             <p>Вариант 1737</p>
         </div>
-        <div class="content">
+        <div class="content" style="text-align: center">
             <div class="clock">
                 <h:form>
                     <p:clock id="clock" mode="#{clock.mode}"/>
-                    <p:selectOneMenu id="modeSelector" value="#{clock.mode}">
-                        <f:selectItem itemLabel="client time" itemValue="client"/>
-                        <f:selectItem itemLabel="server time" itemValue="server"/>
-                    </p:selectOneMenu>
-                    <p:commandButton value="Change mode" update="clock"/>
+                    <br/>
+                    <p class="select-time"
+                       style="margin-bottom: 0px;font-family: sans-serif; color: #004dff">
+                        Select time mode:
+                        <p:selectOneMenu id="modeSelector" value="#{clock.mode}" style="display: inline-block">
+                            <f:selectItem itemLabel="client time" itemValue="client"/>
+                            <f:selectItem itemLabel="server time" itemValue="server"/>
+                        </p:selectOneMenu>
+                    </p>
+                    <p:commandButton value="Change mode" update="clock" style="margin-bottom: 50px"/>
                 </h:form>
             </div>
+            <h:form>
+                <p:commandButton id="submit" action="toMain" value="Main page"/>
+            </h:form>
         </div>
-        <h:form>
-            <p:commandButton id="submit" action="toMain" value="Main page"/>
-        </h:form>
     </div>
 </h:body>
 

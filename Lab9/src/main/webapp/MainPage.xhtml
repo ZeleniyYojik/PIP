@@ -13,64 +13,80 @@
 </h:head>
 
 <h:body>
-    <h:form>
-        <p:selectBooleanCheckbox value="#{check.xm3}">-3</p:selectBooleanCheckbox>
-        <p:selectBooleanCheckbox value="#{check.xm2}">-2</p:selectBooleanCheckbox>
-        <p:selectBooleanCheckbox value="#{check.xm1}">-1</p:selectBooleanCheckbox>
-        <p:selectBooleanCheckbox value="#{check.x0}">0</p:selectBooleanCheckbox>
-        <p:selectBooleanCheckbox value="#{check.x1}">1</p:selectBooleanCheckbox>
-        <p:selectBooleanCheckbox value="#{check.x2}">2</p:selectBooleanCheckbox>
-        <p:selectBooleanCheckbox value="#{check.x3}">3</p:selectBooleanCheckbox>
+    <div class="wrapper" style="margin: auto; width: 980px">
+        <div class="content" style="margin-top: 50px;">
+            <h:form style="color: #004dff; font-family: sans-serif;">
+                <p style="margin-bottom: 5px;font-family: sans-serif; color: #004dff">
+                    Select X:</p>
+                <p:selectBooleanCheckbox value="#{check.xm3}"
+                                         style=" margin-right: 10px">-3</p:selectBooleanCheckbox>
+                <p:selectBooleanCheckbox value="#{check.xm2}"
+                                         style="margin-right: 10px">-2</p:selectBooleanCheckbox>
+                <p:selectBooleanCheckbox value="#{check.xm1}"
+                                         style="margin-right: 10px">-1</p:selectBooleanCheckbox>
+                <p:selectBooleanCheckbox value="#{check.x0}"
+                                         style="margin-right: 10px">0</p:selectBooleanCheckbox>
+                <p:selectBooleanCheckbox value="#{check.x1}"
+                                         style="margin-right: 10px">1</p:selectBooleanCheckbox>
+                <p:selectBooleanCheckbox value="#{check.x2}"
+                                         style="margin-right: 10px">2</p:selectBooleanCheckbox>
+                <p:selectBooleanCheckbox value="#{check.x3}"
+                                         style="margin-right: 10px">3</p:selectBooleanCheckbox>
+                <p style="margin-bottom: 0px;font-family: sans-serif; color: #004dff">
+                    Select Y {-5;3}:
+                    <p:inputText id="Y" required="true" requiredMessage="Value is required"
+                                 value="#{check.y}"
+                                 onkeypress="if (event.keyCode == 13) {return false;}">
+                        <f:validator validatorId="validators.YValidator"/>
+                    </p:inputText>
+                    <p:message for="Y" style="color: red"/>
+                </p>
+                <p style="margin-bottom: 0px;font-family: sans-serif; color: #004dff">
+                    Select R:
+                    <p:selectOneRadio id="R" label="Select R" required="true"
+                                      requiredMessage="Value is required" value="#{check.r}">
+                        <f:validator validatorId="validators.RValidator"/>
+                        <f:selectItem itemValue="1" itemLabel="1"/>
+                        <f:selectItem itemValue="2" itemLabel="2"/>
+                        <f:selectItem itemValue="3" itemLabel="3"/>
+                        <f:selectItem itemValue="4" itemLabel="4"/>
+                        <f:selectItem itemValue="5" itemLabel="5"/>
+                    </p:selectOneRadio>
+                    <p:message for="R" style="color: red"/>
+                </p>
 
-        <p:inputText id="Y" required="true" requiredMessage="Value is required"
-                     value="#{check.y}"
-                     onkeypress="if (event.keyCode == 13) {return false;}">
-            <f:validator validatorId="validators.YValidator"/>
-        </p:inputText>
-        <p:message for="Y" style="color: red"/>
+                <p:commandButton id="submit" value="Submit" action="#{check.checkPoint}" update="@(form),resTable"/>
+                <p style="font-size: 20px; margin-bottom: 5px">Result table:</p>
+                <p:dataTable id="resTable" value="#{results.results}" var="res"
+                             styleClass="result-table"
+                             headerClass="result-table-header"
+                             rowClasses="result-table-odd-row, result-table-even-row"
+                             style="width: 400px;"
+                             scrollable="true" scrollHeight="400">
+                    <p:column>
+                        <f:facet name="header">X</f:facet>
+                        #{res.xCoord}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Y</f:facet>
+                        #{res.yCoord}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">R</f:facet>
+                        #{res.radius}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">In area</f:facet>
+                        #{res.inArea}
+                    </p:column>
+                </p:dataTable>
+            </h:form>
 
-        <p:selectOneRadio id="R" label="Select R" required="true"
-                          requiredMessage="Value is required" value="#{check.r}">
-            <f:validator validatorId="validators.RValidator"/>
-            <f:selectItem itemValue="1" itemLabel="1"/>
-            <f:selectItem itemValue="2" itemLabel="2"/>
-            <f:selectItem itemValue="3" itemLabel="3"/>
-            <f:selectItem itemValue="4" itemLabel="4"/>
-            <f:selectItem itemValue="5" itemLabel="5"/>
-        </p:selectOneRadio>
-        <p:message for="R" style="color: red"/>
-
-        <p:commandButton id="submit" value="Submit" action="#{check.checkPoint}" update="@(form),resTable"/>
-        <div class="result-table">
-            <p:dataTable id="resTable" value="#{results.results}" var="res"
-                         styleClass="result-table"
-                         headerClass="result-table-header"
-                         rowClasses="result-table-odd-row, result-table-even-row"
-                         style="width: 400px;"
-                         scrollable="true" scrollHeight="400">
-                <p:column>
-                    <f:facet name="header">X</f:facet>
-                    #{res.xCoord}
-                </p:column>
-                <p:column>
-                    <f:facet name="header">Y</f:facet>
-                    #{res.yCoord}
-                </p:column>
-                <p:column>
-                    <f:facet name="header">R</f:facet>
-                    #{res.radius}
-                </p:column>
-                <p:column>
-                    <f:facet name="header">In area</f:facet>
-                    #{res.inArea}
-                </p:column>
-            </p:dataTable>
+            <h:form style="margin-top: 30px">
+                <p:commandButton id="goToStart" action="toStart" value="Start page"/>
+            </h:form>
         </div>
-    </h:form>
-
-    <h:form>
-        <p:commandButton id="goToStart" action="toStart" value="Start page"/>
-    </h:form>
+    </div>
 </h:body>
 
 </html>
