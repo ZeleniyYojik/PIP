@@ -110,12 +110,18 @@ public class CheckBean {
             if (!ResultsBean.contains(point)) {
                 ResultsBean.addResult(point);
             }
+            if (!ImageBean.contains(point)) {
+                ImageBean.addPoint(new Point(point.getxCoord(), point.getyCoord(), point.getRadius(), point.isInArea()));
+            }
         }
         if (isXm2()) {
             double x = -2;
             Point point = new Point(x, y, r, inArea(x, y, r));
             if (!ResultsBean.contains(point)) {
                 ResultsBean.addResult(point);
+            }
+            if (!ImageBean.contains(point)) {
+                ImageBean.addPoint(new Point(point.getxCoord(), point.getyCoord(), point.getRadius(), point.isInArea()));
             }
         }
         if (isXm1()) {
@@ -124,12 +130,18 @@ public class CheckBean {
             if (!ResultsBean.contains(point)) {
                 ResultsBean.addResult(point);
             }
+            if (!ImageBean.contains(point)) {
+                ImageBean.addPoint(new Point(point.getxCoord(), point.getyCoord(), point.getRadius(), point.isInArea()));
+            }
         }
         if (isX0()) {
             double x = 0;
             Point point = new Point(x, y, r, inArea(x, y, r));
             if (!ResultsBean.contains(point)) {
                 ResultsBean.addResult(point);
+            }
+            if (!ImageBean.contains(point)) {
+                ImageBean.addPoint(new Point(point.getxCoord(), point.getyCoord(), point.getRadius(), point.isInArea()));
             }
         }
         if (isX3()) {
@@ -138,12 +150,18 @@ public class CheckBean {
             if (!ResultsBean.contains(point)) {
                 ResultsBean.addResult(point);
             }
+            if (!ImageBean.contains(point)) {
+                ImageBean.addPoint(new Point(point.getxCoord(), point.getyCoord(), point.getRadius(), point.isInArea()));
+            }
         }
         if (isX2()) {
             double x = 2;
             Point point = new Point(x, y, r, inArea(x, y, r));
             if (!ResultsBean.contains(point)) {
                 ResultsBean.addResult(point);
+            }
+            if (!ImageBean.contains(point)) {
+                ImageBean.addPoint(new Point(point.getxCoord(), point.getyCoord(), point.getRadius(), point.isInArea()));
             }
         }
         if (isX1()) {
@@ -152,12 +170,24 @@ public class CheckBean {
             if (!ResultsBean.contains(point)) {
                 ResultsBean.addResult(point);
             }
+            if (!ImageBean.contains(point)) {
+                ImageBean.addPoint(new Point(point.getxCoord(), point.getyCoord(), point.getRadius(), point.isInArea()));
+            }
         }
+        ImageBean.setRadius(r);
+        checkExistedPoints(r);
     }
 
     private boolean inArea(double x, double y, double r) {
-        return (y <= r && r >= 0 && x >= 0 && x <= r && r * r >= x * x + y * y)
-                || (y <= 0 && x >= 0 && x <= r && y >= (x - r) / 2)
+        return (y <= r && y >= 0 && x >= 0 && x <= r && r * r >= x * x + y * y)
+                || (y <= 0 && x >= 0 && x <= r && y >= x / 2 - r / 2)
                 || (y <= 0 && y >= -r && x <= 0 && x >= -r / 2);
+    }
+
+    private void checkExistedPoints(double r) {
+        for (Point p : ImageBean.getPointsList()) {
+            p.setRadius(r);
+            p.setInArea(inArea(p.getxCoord(), p.getyCoord(), r));
+        }
     }
 }
