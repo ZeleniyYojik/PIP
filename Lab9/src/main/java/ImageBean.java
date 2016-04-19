@@ -165,8 +165,8 @@ public class ImageBean implements Serializable {
     }
 
     public static void addPoint(Point p) {
-        if (!contains(p)) {
-            points.add(p);
-        }
+//        if (!contains(p)) {
+        points.add(p);
+//        }
     }
 }

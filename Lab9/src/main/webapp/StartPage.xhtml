@@ -25,8 +25,7 @@
                 <h:form id="clockForm" style="color: #004dff; font-family: sans-serif;margin-bottom: 20px;">
                     <h:outputLabel id="clockLabel" value="#{clockTimer.date}"/>
                     <h:commandButton id="clockTimerBtn" style="display: none" action="#{clockTimer.curDate}">
-                        <f:ajax render="txt_count"/>
-                        <f:ajax render="clockLabel"/>
+                            <f:ajax render="clockLabel"/>
                     </h:commandButton>
                     <h:outputScript name="js/clock.js"/>
                 </h:form>
@@ -34,7 +33,7 @@
                     <p:clock id="clock" mode="#{clock.mode}"/>
                     <br/>
                     <p class="select-time"
-                       style="margin-bottom: 0px;font-family: sans-serif; color: #004dff">
+                       style="margin-bottom: 0;font-family: sans-serif; color: #004dff">
                         Select time mode:
                         <p:selectOneMenu id="modeSelector" value="#{clock.mode}" style="display: inline-block">
                             <f:selectItem itemLabel="client time" itemValue="client"/>

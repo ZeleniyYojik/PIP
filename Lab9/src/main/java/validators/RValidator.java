@@ -12,6 +12,7 @@ public class RValidator implements Validator {
     public RValidator() {
     }
 
+    /*Не пашет на хелиосе*/
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         String v = o.toString();

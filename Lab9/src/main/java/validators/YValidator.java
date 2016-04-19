@@ -13,6 +13,7 @@ public class YValidator implements Validator {
     public YValidator() {
     }
 
+    /*Не пашет на хелиосе*/
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         String v = o.toString();
