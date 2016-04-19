@@ -21,7 +21,7 @@ public class CheckBean {
 
     public CheckBean() {
         R = 1;
-        Y="";
+        Y = "";
     }
 
     public String getyClick() {
@@ -204,7 +204,8 @@ public class CheckBean {
         }
     }
 
-    public void chagedRadius(){
+    public void chagedRadius() {
         ImageBean.setRadius(R);
+        checkExistedPoints(R);
     }
 }

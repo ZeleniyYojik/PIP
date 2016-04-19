@@ -10,6 +10,7 @@
 <h:head>
     <title>Main page</title>
     <h:outputStylesheet name="css/mainPageStyle.css"/>
+    <h:outputScript name="js/validateY.js"/>
 </h:head>
 
 <h:body>
@@ -38,7 +39,7 @@
                         Select Y {-5;3}:
                         <p:inputText id="Y" required="#{param['mainForm:areaClick']==null}"
                                      requiredMessage="Value is required"
-                                     value="#{check.y}"/>
+                                     value="#{check.y}" onchange="validateY()"/>
                         <p:message for="Y" style="color: red"/>
                     </p>
                     <p style="margin-bottom: 0;font-family: sans-serif; color: #004dff;">
