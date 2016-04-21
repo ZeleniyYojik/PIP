@@ -21,7 +21,7 @@ public class YValidator implements Validator {
         double value = Double.NaN;
         try {
             value = Double.parseDouble(v);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
         if (Double.isNaN(value) || value > 3 || value < -5) {
             FacesMessage msg =

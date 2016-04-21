@@ -20,7 +20,7 @@ public class CheckBean implements Serializable {
     private double R;
     private String yClick;
     private String xClick;
-    
+
     @ManagedProperty(value = "#{imageBean}")
     private ImageBean imageBean;
 

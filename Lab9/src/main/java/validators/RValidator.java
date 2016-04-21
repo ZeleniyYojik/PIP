@@ -20,7 +20,7 @@ public class RValidator implements Validator {
         double value = Double.NaN;
         try {
             value = Double.parseDouble(v);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
         if (Double.isNaN(value)) {
             FacesMessage msg =
