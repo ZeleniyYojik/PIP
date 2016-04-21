@@ -21,14 +21,14 @@ public class ImageBean implements Serializable {
     int width = 600, height = 600;
     int r = 250;
     int padding = 50;
-    private static List<Point> points = new ArrayList<Point>();
+    private List<Point> points = new ArrayList<Point>();
     private StreamedContent image;
-    private static double radius;
+    private double radius;
 
     public ImageBean() {
     }
 
-    public static List<Point> getPointsList() {
+    public List<Point> getPoints() {
         return points;
     }
 
@@ -57,12 +57,8 @@ public class ImageBean implements Serializable {
         this.image = image;
     }
 
-    public static double getRadius() {
-        return radius;
-    }
-
-    public static void setRadius(double rad) {
-        radius = rad;
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 
     void drawBasic(Graphics2D ig2) {
@@ -155,18 +151,7 @@ public class ImageBean implements Serializable {
         ig2.fillArc(x, y, 10, 10, 0, 360);
     }
 
-    static boolean contains(Point p) {
-        for (Point point : points) {
-            if (p.xCoord == point.xCoord && p.yCoord == point.yCoord) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static void addPoint(Point p) {
-//        if (!contains(p)) {
-        points.add(p);
-//        }
+    public void addPoint(Point p) {
+        this.points.add(p);
     }
 }
