@@ -55,13 +55,13 @@
                     <terse>false</terse>
                     <echo>true</echo>
                     <debug>true</debug>
-                    <glassfishDirectory>/home/panikun/glassfish3</glassfishDirectory>
+                    <glassfishDirectory>/home/panikun/glassfish4</glassfishDirectory>
                     <user>admin</user>
                     <adminPassword>admin</adminPassword>
                     <domain>
                         <name>domain2</name>
                         <host>localhost</host>
-                        <adminPort>4848</adminPort>
+                        <adminPort>4848 </adminPort>
                     </domain>
                     <components>
                         <component>
