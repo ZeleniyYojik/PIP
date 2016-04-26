@@ -39,7 +39,8 @@
                         Select Y {-5;3}:
                         <p:inputText id="Y" required="#{param['mainForm:areaClick']==null}"
                                      requiredMessage="Value is required"
-                                     value="#{check.y}" onchange="validateY()"/>
+                                     value="#{check.y}" onchange="validateY()" onkeyup="validateY()"
+                                     onblur="validateY()"/>
                         <p:message for="Y" style="color: red"/>
                     </p>
                     <p style="margin-bottom: 0;font-family: sans-serif; color: #004dff;">
